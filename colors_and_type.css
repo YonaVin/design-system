@@ -1,0 +1,277 @@
+/* ============================================================
+   GURUFIN DESIGN SYSTEM — Colors & Typography
+   Source: Gurufin Brand Guidelines v1.0 (2026)
+   Fonts: Helvetica (brand-supplied, self-hosted)
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   @FONT-FACE — Helvetica (brand-supplied)
+   ------------------------------------------------------------ */
+@font-face {
+  font-family: "Helvetica";
+  src: url("fonts/Helvetica.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica";
+  src: url("fonts/helvetica-light-587ebe5a59211.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica";
+  src: url("fonts/Helvetica-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica";
+  src: url("fonts/Helvetica-Oblique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica";
+  src: url("fonts/Helvetica-BoldOblique.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Compressed";
+  src: url("fonts/helvetica-compressed-5871d14b6903a.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Helvetica Rounded";
+  src: url("fonts/helvetica-rounded-bold-5871d05ead8de.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ------------------------------------------------------------
+   COLOR TOKENS
+   ------------------------------------------------------------ */
+:root {
+  /* CORE — Brand Blues */
+  --color-ink:           #0A0A0A;
+  --color-signal-blue:   #0048FF;
+  --color-brand-blue:    #0D4689;
+  --color-sky-blue:      #4DA8DD;
+
+  /* DARK BACKGROUNDS */
+  --color-dark-900:      #070F1A;   /* deepest navy — primary dark bg */
+  --color-dark-800:      #0B1521;   /* slightly lighter dark bg */
+  --color-dark-700:      #0C1822;   /* card surfaces on dark */
+  --color-dark-600:      #0D1E2C;
+
+  /* NEUTRAL SCALE */
+  --color-neutral-900:   #363E49;
+  --color-neutral-700:   #5B6B7E;
+  --color-neutral-500:   #889BB7;
+  --color-neutral-300:   #C6D4E3;
+  --color-neutral-100:   #E6EDF5;
+  --color-neutral-50:    #F0F8FF;
+
+  /* LIGHT BACKGROUNDS */
+  --color-surface:       #F5F8FF;   /* primary light bg */
+  --color-paper:         #FFFFFF;
+  --color-border:        #DFE0E4;   /* rgb(223,224,228) */
+  --color-border-subtle: rgba(194,194,194,0.2);
+
+  /* FUNCTIONAL / STATE */
+  --color-success:       #40BF43;
+  --color-danger:        #FF2424;
+  --color-warning:       #FF9822;
+
+  /* GLASS EFFECT */
+  --color-glass-bg:      rgba(217,217,217,0.1);
+  --color-glass-border:  rgba(194,194,194,0.2);
+
+  /* SHADOW */
+  --color-shadow:        rgba(0,0,0,0.25);
+
+  /* SEMANTIC ALIASES */
+  --fg-primary:          var(--color-ink);
+  --fg-secondary:        var(--color-neutral-900);
+  --fg-muted:            var(--color-neutral-700);
+  --fg-subtle:           var(--color-neutral-500);
+  --fg-on-dark:          #F5F8FF;
+  --fg-on-dark-muted:    rgba(245,248,255,0.7);
+
+  --bg-page-light:       var(--color-surface);
+  --bg-page-dark:        var(--color-dark-900);
+  --bg-card-light:       var(--color-paper);
+  --bg-card-dark:        var(--color-glass-bg);
+
+  --border-default:      var(--color-border);
+  --border-dark:         rgba(255,255,255,0.15);
+
+  --accent-primary:      var(--color-brand-blue);
+  --accent-cta:          var(--color-signal-blue);
+  --accent-highlight:    var(--color-sky-blue);
+}
+
+/* ------------------------------------------------------------
+   TYPOGRAPHY TOKENS
+   ------------------------------------------------------------ */
+:root {
+  /* Font Families */
+  --font-sans:     "Helvetica", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:     "Geist Mono", "Roboto Mono", "Courier New", monospace;
+
+  /* Font Weights */
+  --fw-light:    300;
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-bold:     700;
+  --fw-heavy:    800;
+
+  /* Type Scale — Display */
+  --fs-display:  54px;
+  --lh-display:  58px;
+  --ls-display:  -0.02em;
+
+  /* H1 */
+  --fs-h1:       40px;
+  --lh-h1:       48px;
+  --ls-h1:       -0.01em;
+
+  /* H2 */
+  --fs-h2:       28px;
+  --lh-h2:       34px;
+  --ls-h2:       -0.01em;
+
+  /* Lead / H3 */
+  --fs-lead:     18px;
+  --lh-lead:     24px;
+  --ls-lead:     0em;
+
+  /* Body */
+  --fs-body:     16px;
+  --lh-body:     24px;
+  --ls-body:     0em;
+
+  /* Label / Small */
+  --fs-label:    12px;
+  --lh-label:    18px;
+  --ls-label:    0.04em;
+
+  /* Section sub-label (brand guidelines caps) */
+  --fs-caption:  10px;
+  --lh-caption:  14px;
+  --ls-caption:  0.08em;
+}
+
+/* ------------------------------------------------------------
+   SEMANTIC TYPE HELPERS
+   ------------------------------------------------------------ */
+.type-display {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  letter-spacing: var(--ls-display);
+}
+
+.type-h1 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h1);
+  line-height: var(--lh-h1);
+  letter-spacing: var(--ls-h1);
+}
+
+.type-h2 {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+}
+
+.type-lead {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+}
+
+.type-body {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-regular);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.type-label {
+  font-family: var(--font-sans);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  letter-spacing: var(--ls-label);
+  text-transform: uppercase;
+}
+
+.type-mono {
+  font-family: var(--font-mono);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+/* ------------------------------------------------------------
+   SPACING SCALE
+   ------------------------------------------------------------ */
+:root {
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+}
+
+/* ------------------------------------------------------------
+   RADII
+   ------------------------------------------------------------ */
+:root {
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   20px;   /* primary card radius per brand guide */
+  --radius-xl:   32px;
+  --radius-full: 9999px;
+}
+
+/* ------------------------------------------------------------
+   SHADOW SYSTEM
+   ------------------------------------------------------------ */
+:root {
+  --shadow-sm:  0 1px 3px rgba(0,0,0,0.12);
+  --shadow-md:  0 4px 16px rgba(0,0,0,0.18);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,0.25);
+}
+
+/* ------------------------------------------------------------
+   ELEVATION (dark cards)
+   ------------------------------------------------------------ */
+:root {
+  --elevation-1: rgba(255,255,255,0.05);
+  --elevation-2: rgba(255,255,255,0.10);
+  --elevation-3: rgba(255,255,255,0.15);
+}

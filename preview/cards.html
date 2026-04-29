@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: #F5F8FF; padding: 24px; display: flex; gap: 16px; flex-wrap: wrap; align-items: flex-start; }
+
+  /* Light card — white bg, border, soft shadow */
+  .card-light {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow: hidden;
+    flex: 1; min-width: 220px;
+  }
+  .card-body { padding: 22px 24px; }
+  .card-badge {
+    display: inline-block;
+    font-size: 11px; font-weight: 600;
+    color: #555; background: #F0F0F0;
+    border-radius: 999px; padding: 3px 10px;
+    margin-bottom: 12px; border: 1px solid rgba(0,0,0,0.08);
+  }
+  .card-title { font-size: 18px; font-weight: 700; color: #0A0A0A; line-height: 1.3; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .card-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+  /* Split card — left white + right gradient */
+  .card-split {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    overflow: hidden; display: flex;
+    flex: 2; min-width: 320px;
+  }
+  .card-split-left { padding: 22px 24px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .card-split-right {
+    flex: 1;
+    background: linear-gradient(135deg, #6B7FFF 0%, #8B5CF6 50%, #6366F1 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 24px; gap: 10px;
+    position: relative; overflow: hidden;
+  }
+  .card-split-right::before {
+    content: ''; position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E") center/cover;
+    opacity: 0.4;
+  }
+  .split-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.75); position: relative; }
+  .split-title { font-size: 22px; font-weight: 800; color: #fff; text-align: center; letter-spacing: -0.01em; line-height: 1.15; position: relative; text-transform: uppercase; }
+  .split-logo-row {
+    background: rgba(255,255,255,0.2); border-radius: 999px;
+    padding: 8px 16px; display: flex; align-items: center; gap: 8px;
+    position: relative; width: 100%;
+  }
+  .split-logo-text { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: 0.05em; }
+  .split-check { width: 24px; height: 24px; border-radius: 50%; background: #5B7CF7; display: flex; align-items: center; justify-content: center; margin-left: auto; }
+</style>
+</head><body>
+
+  <div class="card-light">
+    <div class="card-body">
+      <span class="card-badge">Development</span>
+      <div class="card-title">Gurufin Chain: Security Audit by Sherlock</div>
+      <div class="card-desc">Building a trusted, resilient L1 for stablecoins.</div>
+    </div>
+  </div>
+
+  <div class="card-split">
+    <div class="card-split-left">
+      <span class="card-badge">Infrastructure</span>
+      <div class="card-title">GX Stablecoin Network</div>
+      <div class="card-desc">Minted via licensed partners, redeemable to fiat at any time.</div>
+    </div>
+    <div class="card-split-right">
+      <div class="split-label">✓ Sherlock</div>
+      <div class="split-title">Gurufin<br>Audit Complete</div>
+      <div class="split-logo-row">
+        <svg width="18" height="20" viewBox="0 0 184 212" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.9587 212L184 160.197V54.6786L92.9587 0L0 54.6786V170.752L46.0002 142.932L92.9587 170.752L144.71 141.013V66.1899L55.5836 118.95V87.2937L92.9587 66.1899V44.1266L36.4168 75.7824V128.543L18.2085 139.095V66.1899L92.9587 21.104L165.792 66.1899V149.646L92.9587 192.813V212ZM64.2087 133.339L127.459 95.9272V128.543L92.0004 149.646L64.2087 133.339Z" fill="white"/></svg>
+        <span class="split-logo-text">GURUFIN</span>
+        <div class="split-check"><svg width="12" height="12" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+      </div>
+    </div>
+  </div>
+
+</body></html>

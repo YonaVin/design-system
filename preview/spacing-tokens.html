@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: var(--color-paper); padding: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .token { background: var(--color-surface); border-radius: 10px; padding: 12px; }
+  .bar-wrap { height: 8px; background: var(--color-neutral-300); border-radius: 4px; margin-bottom: 8px; overflow: hidden; }
+  .bar { height: 8px; background: var(--color-brand-blue); border-radius: 4px; }
+  .name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-neutral-700); }
+  .val { font-size: 11px; font-family: var(--font-mono); color: var(--color-neutral-900); margin-top: 2px; }
+  .section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-neutral-500); margin-bottom: 8px; margin-top: 16px; }
+  .section-title:first-child { margin-top: 0; }
+  .radii-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+  .radius-item { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .radius-box { background: var(--color-brand-blue); opacity: 0.2; width: 48px; height: 48px; background: var(--color-brand-blue); }
+  .radius-label { font-size: 9px; font-family: var(--font-mono); color: var(--color-neutral-700); }
+</style>
+</head><body>
+  <div class="section-title">Spacing Scale</div>
+  <div class="grid">
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:6%"></div></div><div class="name">space-1</div><div class="val">4px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:12%"></div></div><div class="name">space-2</div><div class="val">8px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:18%"></div></div><div class="name">space-3</div><div class="val">12px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:24%"></div></div><div class="name">space-4</div><div class="val">16px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:32%"></div></div><div class="name">space-6</div><div class="val">24px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:48%"></div></div><div class="name">space-8</div><div class="val">32px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:64%"></div></div><div class="name">space-12</div><div class="val">48px</div></div>
+    <div class="token"><div class="bar-wrap"><div class="bar" style="width:100%"></div></div><div class="name">space-16</div><div class="val">64px</div></div>
+  </div>
+  <div class="section-title">Border Radius</div>
+  <div class="radii-row">
+    <div class="radius-item"><div class="radius-box" style="border-radius:8px;"></div><div class="radius-label">sm · 8px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:12px;"></div><div class="radius-label">md · 12px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:20px;"></div><div class="radius-label">lg · 20px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:32px;"></div><div class="radius-label">xl · 32px</div></div>
+    <div class="radius-item"><div class="radius-box" style="border-radius:9999px;width:80px;height:48px;"></div><div class="radius-label">full</div></div>
+  </div>
+</body></html>

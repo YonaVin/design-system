@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: var(--color-paper); padding: 24px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .logo-cell { border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--color-border); }
+  .logo-cell.dark { background: var(--color-dark-900); border-color: rgba(255,255,255,0.1); }
+  .logo-cell.light { background: var(--color-surface); }
+  img { max-width: 180px; height: auto; display: block; }
+  .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-neutral-500); text-align: center; margin-top: 8px; }
+  .cell-wrap { display: flex; flex-direction: column; }
+</style>
+</head><body>
+<div class="grid">
+  <div class="cell-wrap">
+    <div class="logo-cell dark"><img src="../assets/logo-horizontal-white.png" alt="Gurufin logo white"></div>
+    <div class="label">Horizontal · White on Dark</div>
+  </div>
+  <div class="cell-wrap">
+    <div class="logo-cell light"><img src="../assets/logo-horizontal-black.png" alt="Gurufin logo black"></div>
+    <div class="label">Horizontal · Dark on Light</div>
+  </div>
+  <div class="cell-wrap">
+    <div class="logo-cell dark" style="padding:24px;"><img src="../assets/app-icon.png" alt="App icon" style="max-width:80px;border-radius:18px;"></div>
+    <div class="label">App Icon</div>
+  </div>
+  <div class="cell-wrap">
+    <div class="logo-cell dark" style="padding:24px;">
+      <svg width="60" height="69" viewBox="0 0 184 212" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M92.9587 212L184 160.197V54.6786L92.9587 0L0 54.6786V170.752L46.0002 142.932L92.9587 170.752L144.71 141.013V66.1899L55.5836 118.95V87.2937L92.9587 66.1899V44.1266L36.4168 75.7824V128.543L18.2085 139.095V66.1899L92.9587 21.104L165.792 66.1899V149.646L92.9587 192.813V212ZM64.2087 133.339L127.459 95.9272V128.543L92.0004 149.646L64.2087 133.339Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="label">Mark Only · SVG</div>
+  </div>
+</div>
+</body></html>

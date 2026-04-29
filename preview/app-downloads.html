@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: #F0F2F5; padding: 24px; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+  .wrap { display: flex; gap: 16px; width: 100%; max-width: 560px; }
+  .card {
+    flex: 1; background: #fff; border-radius: 16px; border: 1px solid #E8E8E8;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    padding: 24px 20px; display: flex; flex-direction: column; align-items: center;
+    gap: 14px; text-align: center;
+  }
+  .icon { width: 64px; height: 64px; border-radius: 16px; display: flex; align-items: center; justify-content: center; }
+  .platform { font-size: 16px; font-weight: 700; color: #0A0A0A; }
+  .store-name { font-size: 12px; color: #888; margin-top: 2px; }
+  .desc { font-size: 12px; color: #555; line-height: 1.5; }
+  .divider { height: 1px; background: #E8E8E8; width: 100%; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    color: #fff; border: none; border-radius: 99px;
+    padding: 11px 20px; cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s; width: 100%;
+  }
+  .btn:hover { opacity: 0.85; }
+  .btn-android { background: #01875F; }
+  .btn-ios { background: #0D4689; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <!-- Android -->
+    <div class="card">
+      <div class="icon" style="background:#01875F;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="white"><path d="M17.523 15.341 14.47 12l3.053-3.341L21 12l-3.477 3.341ZM3 12l3.477-3.341L9.53 12l-3.053 3.341L3 12Zm9-7.795L7.545 8.659l-1.318-1.25L12 2.205l5.773 5.204-1.318 1.25L12 4.205ZM7.545 15.341l1.318 1.25L12 19.795l3.137-3.204 1.318-1.25L12 21.795 7.545 15.341Z"/></svg>
+      </div>
+      <div>
+        <div class="platform">Android</div>
+        <div class="store-name">Google Play</div>
+      </div>
+      <div class="divider"></div>
+      <div class="desc">Gurufin Wallet — available on Google Play Store for Android devices.</div>
+      <a class="btn btn-android" href="https://play.google.com/store/apps/details?id=com.gurufin.wallet" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.65.19.97.07L14.72 12 3.55.17C3.23.05 2.88.07 2.58.24 2.02.56 1.75 1.16 1.75 1.97v19.06c0 .82.27 1.42.83 1.73ZM16.24 13.53 5.92 21.8l9.68-9.68 1.22 1.21-.58.2ZM20.5 10.5l-2.46-1.41L16.53 12l1.51 1.91 2.46-1.41C21.13 12.14 21.13 10.86 20.5 10.5ZM5.92 2.2l10.32 8.27-1.22 1.21L5.92 2.2Z"/></svg>
+        Google Play
+      </a>
+    </div>
+
+    <!-- iOS -->
+    <div class="card">
+      <div class="icon" style="background:#0D4689;">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      </div>
+      <div>
+        <div class="platform">iOS</div>
+        <div class="store-name">App Store</div>
+      </div>
+      <div class="divider"></div>
+      <div class="desc">Gurufin Wallet Lite — available on Apple App Store for iPhone and iPad.</div>
+      <a class="btn btn-ios" href="https://apps.apple.com/kr/app/gurufin-wallet-lite/id6740982061" target="_blank">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+    </div>
+
+  </div>
+</body>
+</html>

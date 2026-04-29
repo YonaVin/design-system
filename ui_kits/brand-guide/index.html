@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gurufin — Dashboard</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-dark-900);
+    color: var(--fg-on-dark);
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    background: #080f1c;
+    border-right: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    flex-direction: column;
+    padding: 28px 0;
+    height: 100vh;
+  }
+  .sidebar-logo {
+    padding: 0 24px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 20px;
+  }
+  .sidebar-logo img { height: 28px; width: auto; display: block; }
+  .nav-section-label {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; color: rgba(255,255,255,0.25);
+    padding: 0 24px; margin-bottom: 6px; margin-top: 16px;
+  }
+  .nav-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 24px; cursor: pointer; border-radius: 0;
+    font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.5);
+    transition: background 0.15s, color 0.15s;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item:hover { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.85); }
+  .nav-item.active {
+    background: rgba(13,70,137,0.25);
+    color: #fff; border-left-color: var(--color-brand-blue);
+    font-weight: 700;
+  }
+  .nav-icon { width: 16px; height: 16px; opacity: 0.7; flex-shrink: 0; }
+  .nav-item.active .nav-icon { opacity: 1; }
+  .sidebar-bottom { margin-top: auto; padding: 20px 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .user-row { display: flex; align-items: center; gap: 10px; }
+  .user-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--color-brand-blue); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; }
+  .user-name { font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.85); }
+  .user-role { font-size: 11px; color: rgba(255,255,255,0.35); }
+
+  /* ── MAIN ── */
+  .main {
+    flex: 1; overflow-y: auto; overflow-x: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    padding: 20px 36px;
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: #070f1a;
+    position: sticky; top: 0; z-index: 10;
+  }
+  .topbar-title { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+  .topbar-right { display: flex; align-items: center; gap: 12px; }
+  .network-badge {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(64,191,67,0.1); border: 1px solid rgba(64,191,67,0.25);
+    border-radius: 99px; padding: 5px 12px;
+    font-size: 11px; font-weight: 700; color: #40BF43;
+    letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .dot-live { width: 6px; height: 6px; border-radius: 50%; background: #40BF43; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .btn-topbar {
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    background: var(--color-brand-blue); color: #fff; border: none;
+    border-radius: 99px; padding: 8px 18px; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .btn-topbar:hover { opacity: 0.85; }
+
+  /* ── PAGE CONTENT ── */
+  .page { padding: 32px 36px; display: none; flex-direction: column; gap: 28px; }
+  .page.active { display: flex; }
+
+  /* ── KPI CARDS ── */
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .kpi-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg);
+    padding: 20px 22px;
+  }
+  .kpi-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); margin-bottom: 10px; }
+  .kpi-value { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; color: #fff; font-family: "Courier New", monospace; }
+  .kpi-sub { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 5px; }
+  .kpi-change { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 700; margin-top: 6px; }
+  .kpi-change.up { color: #40BF43; }
+  .kpi-change.down { color: #FF2424; }
+
+  /* ── SECTION HEADER ── */
+  .section-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .section-title { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+  .btn-link { font-size: 12px; font-weight: 700; color: var(--color-sky-blue); text-transform: uppercase; letter-spacing: 0.05em; cursor: pointer; background: none; border: none; }
+
+  /* ── TABLE ── */
+  .table-wrap {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.3); padding: 14px 20px; text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  tbody tr { border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.12s; cursor: pointer; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.04); }
+  td { padding: 14px 20px; font-size: 13px; color: rgba(255,255,255,0.75); }
+  td.mono { font-family: "Courier New", monospace; font-size: 12px; color: rgba(255,255,255,0.5); }
+  td.amount { font-family: "Courier New", monospace; font-weight: 700; color: #fff; }
+  .tx-type { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 8px; border-radius: 99px; }
+  .tx-send { background: rgba(0,72,255,0.12); color: #4D8DFF; border: 1px solid rgba(0,72,255,0.2); }
+  .tx-receive { background: rgba(64,191,67,0.1); color: #40BF43; border: 1px solid rgba(64,191,67,0.2); }
+  .tx-swap { background: rgba(255,152,34,0.1); color: #FF9822; border: 1px solid rgba(255,152,34,0.2); }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+
+  /* ── TWO COLS ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  /* ── CHAIN CARD ── */
+  .chain-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+  }
+  .chain-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .chain-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; margin-bottom: 16px; }
+  .chain-stat { display: flex; gap: 24px; }
+  .stat-item .s-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: rgba(255,255,255,0.3); font-weight: 700; margin-bottom: 3px; }
+  .stat-item .s-val { font-size: 18px; font-weight: 700; font-family: "Courier New", monospace; color: #fff; }
+
+  /* ── SEND PAGE ── */
+  .send-wrap { max-width: 560px; }
+  .form-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-lg); padding: 28px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+  .form-field:last-child { margin-bottom: 0; }
+  .form-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.4); }
+  .form-input {
+    font-family: var(--font-sans); font-size: 14px; color: #fff;
+    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { border-color: var(--color-brand-blue); box-shadow: 0 0 0 3px rgba(13,70,137,0.2); }
+  .form-input::placeholder { color: rgba(255,255,255,0.25); }
+  .form-input.mono { font-family: "Courier New", monospace; font-size: 18px; }
+  .form-select {
+    font-family: var(--font-sans); font-size: 14px; color: #fff;
+    background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-md); padding: 12px 16px; outline: none;
+    appearance: none; cursor: pointer;
+  }
+  .form-hint { font-size: 11px; color: rgba(255,255,255,0.3); }
+  .btn-primary-full {
+    width: 100%; font-family: var(--font-sans); font-size: 15px; font-weight: 700;
+    background: var(--color-brand-blue); color: #fff; border: none;
+    border-radius: 99px; padding: 14px; cursor: pointer;
+    transition: opacity 0.15s; margin-top: 8px;
+  }
+  .btn-primary-full:hover { opacity: 0.85; }
+
+  /* ── EXPLORER ── */
+  .block-row { display: flex; align-items: center; gap: 16px; padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,0.04); cursor: pointer; transition: background 0.12s; }
+  .block-row:hover { background: rgba(255,255,255,0.04); }
+  .block-row:last-child { border-bottom: none; }
+  .block-num { font-family: "Courier New", monospace; font-size: 14px; font-weight: 700; color: var(--color-sky-blue); width: 80px; flex-shrink: 0; }
+  .block-meta { flex: 1; }
+  .block-validator { font-size: 13px; color: rgba(255,255,255,0.75); font-weight: 700; margin-bottom: 2px; }
+  .block-time { font-size: 11px; color: rgba(255,255,255,0.35); }
+  .block-txs { font-size: 12px; font-family: "Courier New", monospace; color: rgba(255,255,255,0.45); text-align: right; }
+  .block-size { font-size: 11px; color: rgba(255,255,255,0.3); text-align: right; }
+
+  /* ── BG ORBS ── */
+  .bg-orb {
+    position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+    filter: blur(80px); opacity: 0.12;
+  }
+  .orb-tl { width: 600px; height: 600px; top: -200px; left: -200px; background: radial-gradient(circle, #063544 0%, transparent 70%); }
+  .orb-br { width: 500px; height: 500px; bottom: -150px; right: -150px; background: radial-gradient(circle, #0D4689 0%, transparent 70%); }
+</style>
+</head>
+<body>
+
+<div class="bg-orb orb-tl"></div>
+<div class="bg-orb orb-br"></div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <img src="../../assets/logo-horizontal-white.png" alt="Gurufin">
+  </div>
+
+  <div class="nav-section-label">Main</div>
+  <a class="nav-item active" onclick="showPage('dashboard')">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    Dashboard
+  </a>
+  <a class="nav-item" onclick="showPage('send')">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    Send / Receive
+  </a>
+  <a class="nav-item" onclick="showPage('explorer')">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    Chain Explorer
+  </a>
+
+  <div class="nav-section-label">Finance</div>
+  <a class="nav-item" onclick="">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+    Wallet
+  </a>
+  <a class="nav-item" onclick="">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    Markets
+  </a>
+  <a class="nav-item" onclick="">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+    History
+  </a>
+
+  <div class="nav-section-label">Settings</div>
+  <a class="nav-item" onclick="">
+    <svg class="nav-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    Settings
+  </a>
+
+  <div class="sidebar-bottom">
+    <div class="user-row">
+      <div class="user-avatar">JR</div>
+      <div>
+        <div class="user-name">Jack Reno</div>
+        <div class="user-role">Senior Manager</div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main" style="position:relative;z-index:1;">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-title" id="page-title">Dashboard</div>
+    <div class="topbar-right">
+      <div class="network-badge"><span class="dot-live"></span>Gurufin Chain · Live</div>
+      <button class="btn-topbar">+ New Transaction</button>
+    </div>
+  </div>
+
+  <!-- DASHBOARD PAGE -->
+  <div class="page active" id="page-dashboard">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">Total Balance</div>
+        <div class="kpi-value">84,502.00</div>
+        <div class="kpi-sub">GX Stablecoin</div>
+        <div class="kpi-change up">↑ 2.4% this month</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Transactions</div>
+        <div class="kpi-value">1,284</div>
+        <div class="kpi-sub">Last 30 days</div>
+        <div class="kpi-change up">↑ 11% vs prev</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Block Height</div>
+        <div class="kpi-value">4,192,037</div>
+        <div class="kpi-sub">Gurufin Chain</div>
+        <div class="kpi-change up">↑ ~6s avg block</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">GX Price</div>
+        <div class="kpi-value">1.00</div>
+        <div class="kpi-sub">USD Pegged</div>
+        <div class="kpi-change" style="color:rgba(255,255,255,0.3);">— Stable</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-header">
+        <div class="section-title">Recent Transactions</div>
+        <button class="btn-link">View all →</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TX Hash</th>
+              <th>Type</th>
+              <th>From / To</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Time</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="mono">0xA3F2…B91C</td>
+              <td><span class="tx-type tx-send">Send</span></td>
+              <td class="mono" style="font-size:11px;">0x9B4A…3D20</td>
+              <td class="amount">− 500.00 GX</td>
+              <td><span class="status-dot" style="background:#40BF43;"></span><span style="font-size:12px;color:#40BF43;font-weight:700;">Confirmed</span></td>
+              <td class="mono">2 min ago</td>
+            </tr>
+            <tr>
+              <td class="mono">0x7CE1…4A88</td>
+              <td><span class="tx-type tx-receive">Receive</span></td>
+              <td class="mono" style="font-size:11px;">0xF12D…E5C1</td>
+              <td class="amount" style="color:#40BF43;">+ 1,200.00 GX</td>
+              <td><span class="status-dot" style="background:#40BF43;"></span><span style="font-size:12px;color:#40BF43;font-weight:700;">Confirmed</span></td>
+              <td class="mono">18 min ago</td>
+            </tr>
+            <tr>
+              <td class="mono">0x2D88…F30B</td>
+              <td><span class="tx-type tx-swap">Swap</span></td>
+              <td class="mono" style="font-size:11px;">DEX · IBC Bridge</td>
+              <td class="amount">250.00 GX → ETH</td>
+              <td><span class="status-dot" style="background:#FF9822;"></span><span style="font-size:12px;color:#FF9822;font-weight:700;">Pending</span></td>
+              <td class="mono">34 min ago</td>
+            </tr>
+            <tr>
+              <td class="mono">0xB09C…1122</td>
+              <td><span class="tx-type tx-send">Send</span></td>
+              <td class="mono" style="font-size:11px;">0x44AB…C700</td>
+              <td class="amount">− 75.50 GX</td>
+              <td><span class="status-dot" style="background:#40BF43;"></span><span style="font-size:12px;color:#40BF43;font-weight:700;">Confirmed</span></td>
+              <td class="mono">1 hr ago</td>
+            </tr>
+            <tr>
+              <td class="mono">0xD3EA…9F02</td>
+              <td><span class="tx-type tx-receive">Receive</span></td>
+              <td class="mono" style="font-size:11px;">0x8810…2BA4</td>
+              <td class="amount" style="color:#40BF43;">+ 10,000.00 GX</td>
+              <td><span class="status-dot" style="background:#FF2424;"></span><span style="font-size:12px;color:#FF2424;font-weight:700;">Failed</span></td>
+              <td class="mono">3 hr ago</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="chain-card">
+        <div class="chain-name">Gurufin Chain</div>
+        <div class="chain-desc">L1 blockchain providing programmable rails for modern finance — built to integrate, audited by design.</div>
+        <div class="chain-stat">
+          <div class="stat-item"><div class="s-label">Validators</div><div class="s-val">128</div></div>
+          <div class="stat-item"><div class="s-label">TPS</div><div class="s-val">4,200</div></div>
+          <div class="stat-item"><div class="s-label">Finality</div><div class="s-val">~6s</div></div>
+        </div>
+      </div>
+      <div class="chain-card">
+        <div class="chain-name">GX Stablecoin Network</div>
+        <div class="chain-desc">Minted via licensed partner fiat deposits. Flow via IBC for DeFi. Redeemable to fiat at any time.</div>
+        <div class="chain-stat">
+          <div class="stat-item"><div class="s-label">Minted</div><div class="s-val">$482M</div></div>
+          <div class="stat-item"><div class="s-label">Peg</div><div class="s-val">$1.00</div></div>
+          <div class="stat-item"><div class="s-label">Chains</div><div class="s-val">7</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEND PAGE -->
+  <div class="page" id="page-send">
+    <div class="send-wrap">
+      <div style="margin-bottom:24px;">
+        <div style="font-size:24px;font-weight:700;letter-spacing:-0.01em;margin-bottom:6px;">Send GX Stablecoin</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.4);">Transfer instantly via Gurufin Chain. Compliance-grade stability.</div>
+      </div>
+      <div class="form-card">
+        <div class="form-field">
+          <label class="form-label">Recipient Address</label>
+          <input class="form-input" type="text" placeholder="0x1a2b3c4d5e6f…" />
+        </div>
+        <div class="form-field">
+          <label class="form-label">Amount (GX)</label>
+          <input class="form-input mono" type="text" placeholder="0.00" value="500.00" />
+          <span style="font-size:11px;color:rgba(255,255,255,0.3);">Available: 84,502.00 GX</span>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Network</label>
+          <select class="form-select">
+            <option>Gurufin Chain (native)</option>
+            <option>IBC Bridge → Cosmos</option>
+            <option>IBC Bridge → Ethereum</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Memo (optional)</label>
+          <input class="form-input" type="text" placeholder="Payment reference, order ID…" />
+        </div>
+        <div style="background:rgba(13,70,137,0.15);border:1px solid rgba(13,70,137,0.3);border-radius:12px;padding:14px 16px;margin-bottom:18px;">
+          <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:var(--color-sky-blue);margin-bottom:8px;">Transaction Summary</div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:4px;"><span>Amount</span><span style="font-family:monospace;color:#fff;font-weight:700;">500.00 GX</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:4px;"><span>Network fee</span><span style="font-family:monospace;color:#fff;">0.001 GX</span></div>
+          <div style="height:1px;background:rgba(255,255,255,0.08);margin:10px 0;"></div>
+          <div style="display:flex;justify-content:space-between;font-size:14px;font-weight:700;color:#fff;"><span>Total</span><span style="font-family:monospace;">500.001 GX</span></div>
+        </div>
+        <button class="btn-primary-full">Send Transaction</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPLORER PAGE -->
+  <div class="page" id="page-explorer">
+    <div>
+      <div style="font-size:24px;font-weight:700;letter-spacing:-0.01em;margin-bottom:4px;">Chain Explorer</div>
+      <div style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:24px;">Live blocks on Gurufin Chain · Height <span style="font-family:monospace;color:var(--color-sky-blue);">4,192,037</span></div>
+    </div>
+    <div class="table-wrap">
+      <div class="block-row" style="background:rgba(13,70,137,0.12);">
+        <div class="block-num">#4192037</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-001</div>
+          <div class="block-time">Just now · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">42 txns</div>
+          <div class="block-size">128.4 KB</div>
+        </div>
+      </div>
+      <div class="block-row">
+        <div class="block-num">#4192036</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-014</div>
+          <div class="block-time">6s ago · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">37 txns</div>
+          <div class="block-size">114.2 KB</div>
+        </div>
+      </div>
+      <div class="block-row">
+        <div class="block-num">#4192035</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-007</div>
+          <div class="block-time">12s ago · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">55 txns</div>
+          <div class="block-size">201.8 KB</div>
+        </div>
+      </div>
+      <div class="block-row">
+        <div class="block-num">#4192034</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-023</div>
+          <div class="block-time">18s ago · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">29 txns</div>
+          <div class="block-size">95.1 KB</div>
+        </div>
+      </div>
+      <div class="block-row">
+        <div class="block-num">#4192033</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-002</div>
+          <div class="block-time">24s ago · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">61 txns</div>
+          <div class="block-size">234.7 KB</div>
+        </div>
+      </div>
+      <div class="block-row">
+        <div class="block-num">#4192032</div>
+        <div class="block-meta">
+          <div class="block-validator">Validator Node GRF-019</div>
+          <div class="block-time">30s ago · Confirmed</div>
+        </div>
+        <div>
+          <div class="block-txs">18 txns</div>
+          <div class="block-size">72.3 KB</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+const titles = { dashboard: 'Dashboard', send: 'Send / Receive', explorer: 'Chain Explorer' };
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.getElementById('page-title').textContent = titles[id];
+  event.currentTarget.classList.add('active');
+  localStorage.setItem('gurufin_page', id);
+}
+// Restore last page
+const saved = localStorage.getItem('gurufin_page');
+if (saved && document.getElementById('page-' + saved)) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('page-' + saved).classList.add('active');
+  document.getElementById('page-title').textContent = titles[saved];
+  const navItems = document.querySelectorAll('.nav-item');
+  navItems.forEach(n => { if (n.getAttribute('onclick') && n.getAttribute('onclick').includes(saved)) n.classList.add('active'); });
+}
+</script>
+</body>
+</html>

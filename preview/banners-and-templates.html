@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gurufin — Banners & Document Templates</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: #F0F2F5;
+    color: #0A0A0A;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ── SECTION ── */
+  .section-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #0D4689; margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 700; letter-spacing: -0.01em;
+    color: #0A0A0A; margin-bottom: 4px;
+  }
+  .section-desc {
+    font-size: 13px; color: #666; line-height: 1.5; margin-bottom: 20px;
+  }
+
+  /* ── BANNER CARD ── */
+  .banner-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #E8E8E8;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .banner-preview {
+    width: 100%; display: block;
+    border-bottom: 1px solid #E8E8E8;
+  }
+  .banner-footer {
+    padding: 16px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+  }
+  .banner-info { display: flex; flex-direction: column; gap: 2px; }
+  .banner-name { font-size: 13px; font-weight: 700; color: #0A0A0A; }
+  .banner-spec { font-size: 11px; color: #888; font-family: "Courier New", monospace; }
+
+  /* ── DOWNLOAD BTN ── */
+  .btn-download {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    background: #0D4689; color: #fff; border: none;
+    border-radius: 99px; padding: 9px 20px; cursor: pointer;
+    text-decoration: none; white-space: nowrap;
+    transition: opacity 0.15s;
+    flex-shrink: 0;
+  }
+  .btn-download:hover { opacity: 0.85; }
+  .btn-download svg { flex-shrink: 0; }
+
+  /* ── DOCUMENT TEMPLATES ── */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .doc-card {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #E8E8E8;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .doc-preview-wrap {
+    background: #E8EDF2;
+    padding: 20px;
+    display: flex; align-items: center; justify-content: center;
+    border-bottom: 1px solid #E8E8E8;
+    min-height: 260px;
+  }
+  .doc-preview-img {
+    width: auto;
+    max-width: 100%;
+    max-height: 260px;
+    border-radius: 4px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    display: block;
+  }
+  .doc-footer {
+    padding: 16px 20px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .doc-name { font-size: 14px; font-weight: 700; color: #0A0A0A; }
+  .doc-desc { font-size: 12px; color: #666; line-height: 1.4; }
+  .doc-actions { display: flex; gap: 8px; }
+  .btn-dl-png {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    background: #0D4689; color: #fff; border: none;
+    border-radius: 99px; padding: 7px 16px; cursor: pointer;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .btn-dl-png:hover { opacity: 0.85; }
+  .btn-dl-pdf {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-sans); font-size: 12px; font-weight: 700;
+    background: transparent; color: #0D4689;
+    border: 1.5px solid #0D4689;
+    border-radius: 99px; padding: 7px 16px; cursor: pointer;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .btn-dl-pdf:hover { opacity: 0.7; }
+
+  /* ── DOWNLOAD ICON ── */
+  .dl-icon { width: 14px; height: 14px; }
+</style>
+</head>
+<body>
+
+<!-- SECTION 1: X Banner -->
+<div>
+  <div class="section-label">Social Media · Section 01</div>
+  <div class="section-title">X (Twitter) Banner</div>
+  <div class="section-desc">Official header banner for X profiles. Recommended size: 1500 × 500 px.</div>
+  <div class="banner-card">
+    <img class="banner-preview" src="../assets/banner-x.png" alt="Gurufin X banner">
+    <div class="banner-footer">
+      <div class="banner-info">
+        <div class="banner-name">gurufin-x-banner.png</div>
+        <div class="banner-spec">PNG · 1500 × 500 px · Recommended for X / Twitter</div>
+      </div>
+      <button class="btn-download" onclick="dlFile('../assets/banner-x.png','gurufin-x-banner.png')">
+        <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download PNG
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: LinkedIn Banner -->
+<div>
+  <div class="section-label">Social Media · Section 02</div>
+  <div class="section-title">LinkedIn Banner</div>
+  <div class="section-desc">Official header banner for LinkedIn company and personal profiles. Recommended size: 1584 × 396 px.</div>
+  <div class="banner-card">
+    <img class="banner-preview" src="../assets/banner-linkedin.png" alt="Gurufin LinkedIn banner">
+    <div class="banner-footer">
+      <div class="banner-info">
+        <div class="banner-name">gurufin-linkedin-banner.png</div>
+        <div class="banner-spec">PNG · 1584 × 396 px · Recommended for LinkedIn</div>
+      </div>
+      <button class="btn-download" onclick="dlFile('../assets/banner-linkedin.png','gurufin-linkedin-banner.png')">
+        <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+        Download PNG
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: Document Templates -->
+<div>
+  <div class="section-label">Brand Applications · Section 03</div>
+  <div class="section-title">Document Templates</div>
+  <div class="section-desc">Official branded letterhead templates for formal correspondence. Available as PNG (for design reference) and PDF (print-ready).</div>
+  <div class="docs-grid">
+
+    <!-- Template A: Formal (blue sidebar) -->
+    <div class="doc-card">
+      <div class="doc-preview-wrap">
+        <img class="doc-preview-img" src="../assets/doc-template-formal.png" alt="Formal letterhead template">
+      </div>
+      <div class="doc-footer">
+        <div>
+          <div class="doc-name">Formal Letterhead</div>
+          <div class="doc-desc">Blue sidebar with mark, contact header top-right, watermark mark bottom-right. Use for official company correspondence.</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-dl-png" onclick="dlFile('../assets/doc-template-formal.png','gurufin-letterhead-formal.png')">
+            <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            PNG
+          </button>
+          <button class="btn-dl-pdf" onclick="dlFile('../assets/doc-template-formal.pdf','gurufin-letterhead-formal.pdf')">
+            <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Template B: Simple -->
+    <div class="doc-card">
+      <div class="doc-preview-wrap">
+        <img class="doc-preview-img" src="../assets/doc-template-simple.png" alt="Simple letterhead template">
+      </div>
+      <div class="doc-footer">
+        <div>
+          <div class="doc-name">Simple Letterhead</div>
+          <div class="doc-desc">Clean layout with horizontal lockup top-left, contact footer bottom-left, watermark mark bottom-right. Use for general communication.</div>
+        </div>
+        <div class="doc-actions">
+          <button class="btn-dl-png" onclick="dlFile('../assets/doc-template-simple.png','gurufin-letterhead-simple.png')">
+            <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            PNG
+          </button>
+          <button class="btn-dl-pdf" onclick="dlFile('../assets/doc-template-simple.pdf','gurufin-letterhead-simple.pdf')">
+            <svg class="dl-icon" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+async function dlFile(url, filename) {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  } catch(e) {
+    alert('Download failed: ' + e.message);
+  }
+}
+</script>
+</body>
+</html>

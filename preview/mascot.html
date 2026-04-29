@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: var(--color-dark-900); padding: 24px; display: flex; align-items: center; gap: 32px; }
+  .mascot-wrap { width: 160px; height: 160px; flex-shrink: 0; background: #fff; border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .mascot-img { width: 140px; height: 140px; object-fit: contain; }
+  .text { color: var(--fg-on-dark); }
+  .name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .desc { font-size: 14px; line-height: 1.5; color: var(--fg-on-dark-muted); margin-bottom: 12px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 99px; background: rgba(77,168,221,0.15); border: 1px solid rgba(77,168,221,0.3); color: #4DA8DD; }
+</style>
+</head><body>
+  <div class="mascot-wrap"><img class="mascot-img" src="../assets/mascot.png" alt="Golden Wing mascot"></div>
+  <div class="text">
+    <div class="name">The Golden Wing</div>
+    <div class="desc">Gurufin's mascot — inspired by the myth of Garuda. Symbolises speed, protection, and clarity in complex financial systems.</div>
+    <div class="tags">
+      <span class="tag">Protective</span>
+      <span class="tag">Fast &amp; Precise</span>
+      <span class="tag">Myth-Inspired</span>
+    </div>
+  </div>
+</body></html>

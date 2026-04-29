@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gurufin Design System</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --page-bg: #F4F6FA;
+    --card-bg: #fff;
+    --border: #E4E7EF;
+    --text: #0A0A0A;
+    --muted: #6B7280;
+    --accent: #0D4689;
+    --accent-light: #5B7CF7;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #070F1A;
+    padding: 0 48px;
+    height: 64px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .header-logo { height: 28px; width: auto; display: block; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .header-badge {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+    text-transform: uppercase; color: rgba(255,255,255,0.45);
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 99px; padding: 4px 12px;
+  }
+  .header-version {
+    font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3);
+    font-family: "Courier New", monospace;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: #070F1A;
+    padding: 64px 48px 72px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    width: 600px; height: 600px; border-radius: 50%;
+    top: -200px; left: -200px;
+    background: radial-gradient(circle, rgba(13,70,137,0.4) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    bottom: -150px; right: -100px;
+    background: radial-gradient(circle, rgba(91,124,247,0.2) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 680px; }
+  .hero-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #4DA8DD; margin-bottom: 16px; }
+  .hero-title { font-size: 48px; font-weight: 700; letter-spacing: -0.02em; color: #fff; line-height: 1.1; margin-bottom: 16px; }
+  .hero-desc { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.6; max-width: 520px; }
+
+  /* ── NAV ── */
+  .nav {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex; gap: 0; overflow-x: auto;
+    position: sticky; top: 64px; z-index: 99;
+  }
+  .nav-item {
+    font-size: 13px; font-weight: 600; color: var(--muted);
+    padding: 16px 20px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: color 0.15s, border-color 0.15s;
+    text-decoration: none; display: block;
+  }
+  .nav-item:hover { color: var(--text); }
+  .nav-item.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── MAIN ── */
+  .main { padding: 48px; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 64px; }
+
+  /* ── SECTION ── */
+  .section {}
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 24px; }
+  .section-name { font-size: 22px; font-weight: 700; letter-spacing: -0.01em; }
+  .section-count { font-size: 12px; color: var(--muted); font-weight: 600; }
+  .section-divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+
+  /* ── GRID LAYOUTS ── */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .grid-1 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+
+  /* ── TOKEN CARD ── */
+  .token-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .token-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+
+  /* ── COLOR SWATCHES ── */
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 60px; }
+  .swatch-block { height: 48px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.06); }
+  .swatch-name { font-size: 10px; font-weight: 700; color: var(--text); }
+  .swatch-hex { font-size: 9px; color: var(--muted); font-family: "Courier New", monospace; }
+
+  /* ── TYPE SPECIMEN ── */
+  .type-row { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+  .type-row:last-child { border-bottom: none; padding-bottom: 0; }
+  .type-meta { width: 110px; flex-shrink: 0; }
+  .type-meta-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+  .type-meta-spec { font-size: 9px; color: #aaa; font-family: "Courier New", monospace; margin-top: 2px; }
+  .type-specimen { color: var(--text); }
+
+  /* ── LOGO GRID ── */
+  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .logo-cell { border-radius: 14px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid var(--border); }
+  .logo-cell.dark { background: #070F1A; border-color: rgba(255,255,255,0.1); }
+  .logo-cell.light { background: var(--page-bg); }
+  .logo-cell img { max-width: 160px; height: auto; display: block; }
+  .logo-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); text-align: center; }
+
+  /* ── COMPONENT PREVIEW ── */
+  .component-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .component-preview {
+    padding: 28px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .component-preview.dark { background: #070F1A; }
+  .component-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); padding: 12px 20px; }
+
+  /* ── BUTTON STYLES ── */
+  .btn-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .ds-btn { font-family: var(--font-sans); font-weight: 700; cursor: pointer; border: none; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; transition: opacity 0.15s; }
+  .ds-btn:hover { opacity: 0.85; }
+  .ds-btn-primary { background: #5B7CF7; color: #fff; font-size: 14px; padding: 10px 22px; }
+  .ds-btn-white { background: #fff; color: #0A0A0A; font-size: 14px; padding: 10px 22px; }
+  .ds-btn-ghost { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.3); font-size: 14px; padding: 10px 22px; }
+  .ds-btn-outline { background: transparent; color: #0A0A0A; border: 1.5px solid rgba(0,0,0,0.15); font-size: 14px; padding: 10px 22px; }
+  .ds-btn-sm { font-size: 12px; padding: 7px 16px; }
+  .ds-btn-danger { background: #FF2424; color: #fff; font-size: 14px; padding: 10px 22px; }
+
+  /* ── BADGE STYLES ── */
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .ds-badge { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 99px; display: inline-flex; align-items: center; gap: 5px; }
+  .ds-badge .dot { width: 6px; height: 6px; border-radius: 50%; }
+  .badge-blue { background: rgba(13,70,137,0.1); color: #0D4689; border: 1px solid rgba(13,70,137,0.2); }
+  .badge-signal { background: rgba(91,124,247,0.12); color: #5B7CF7; border: 1px solid rgba(91,124,247,0.22); }
+  .badge-success { background: rgba(64,191,67,0.1); color: #2AA82D; border: 1px solid rgba(64,191,67,0.2); }
+  .badge-danger { background: rgba(255,36,36,0.1); color: #CC1C1C; border: 1px solid rgba(255,36,36,0.18); }
+  .badge-warning { background: rgba(255,152,34,0.12); color: #A05C00; border: 1px solid rgba(255,152,34,0.22); }
+  .badge-neutral { background: var(--page-bg); color: #555; border: 1px solid var(--border); }
+
+  /* ── CARD STYLES ── */
+  .ds-card-light { background: #fff; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 2px 12px rgba(0,0,0,0.07); padding: 20px; }
+  .ds-card-pill { font-size: 11px; font-weight: 600; color: #555; background: #F0F0F0; border-radius: 99px; padding: 3px 10px; border: 1px solid rgba(0,0,0,0.06); display: inline-block; margin-bottom: 10px; }
+  .ds-card-title { font-size: 16px; font-weight: 700; color: #0A0A0A; margin-bottom: 6px; letter-spacing: -0.01em; }
+  .ds-card-body { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* ── FORM INPUT ── */
+  .ds-input { font-family: var(--font-sans); font-size: 14px; color: #0A0A0A; background: #fff; border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 16px; outline: none; width: 100%; }
+  .ds-input:focus { border-color: #5B7CF7; }
+  .ds-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 5px; display: block; }
+
+  /* ── BRAND ASSETS ── */
+  .asset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .asset-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .asset-thumb {
+    aspect-ratio: 16/9; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: #F8FAFF;
+  }
+  .asset-thumb.dark-thumb { background: #070F1A; }
+  .asset-thumb img { max-width: 80%; max-height: 80%; object-fit: contain; }
+  .asset-footer { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .asset-name { font-size: 12px; font-weight: 700; color: var(--text); }
+  .asset-type { font-size: 10px; color: var(--muted); font-family: "Courier New", monospace; }
+  .dl-btn {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-family: var(--font-sans); font-size: 11px; font-weight: 700;
+    background: var(--accent); color: #fff; border: none;
+    border-radius: 8px; padding: 6px 12px; cursor: pointer;
+    text-decoration: none; transition: opacity 0.15s;
+  }
+  .dl-btn:hover { opacity: 0.85; }
+
+  /* ── SOCIAL / LINKS ── */
+  .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .link-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .link-top { display: flex; align-items: center; gap: 12px; }
+  .link-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .link-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .link-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .link-divider { height: 1px; background: var(--border); }
+  .link-desc { font-size: 12px; color: #666; line-height: 1.5; flex: 1; }
+  .link-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    color: #fff; border: none; border-radius: 10px;
+    padding: 10px; cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s; width: 100%;
+  }
+  .link-btn:hover { opacity: 0.85; }
+
+  /* ── FIGMA CARD ── */
+  .figma-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .figma-cover { position: relative; width: 100%; cursor: pointer; }
+  .figma-cover img { width: 100%; display: block; aspect-ratio: 16/9; object-fit: cover; }
+  .figma-footer { padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; border-top: 1px solid var(--border); }
+  .figma-info-name { font-size: 14px; font-weight: 700; color: var(--text); }
+  .figma-info-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ── APP DOWNLOAD GRID ── */
+  .app-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .app-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    padding: 24px 20px; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+  }
+  .app-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+  .app-name { font-size: 15px; font-weight: 700; color: var(--text); }
+  .app-store { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .app-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 700;
+    color: #fff; border: none; border-radius: 10px;
+    padding: 11px 20px; cursor: pointer; text-decoration: none;
+    transition: opacity 0.15s; width: 100%;
+  }
+  .app-btn:hover { opacity: 0.85; }
+
+  /* ── MASCOT CARD ── */
+  .mascot-card {
+    background: #070F1A; border-radius: 16px; border: 1px solid rgba(255,255,255,0.08);
+    padding: 28px; display: flex; align-items: center; gap: 28px;
+  }
+  .mascot-img { width: 120px; height: 120px; object-fit: contain; flex-shrink: 0; border-radius: 12px; background: #fff; padding: 8px; }
+  .mascot-text { color: #F5F8FF; }
+  .mascot-name { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .mascot-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; margin-bottom: 12px; }
+  .mascot-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mascot-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 4px 10px; border-radius: 99px; background: rgba(77,168,221,0.15); border: 1px solid rgba(77,168,221,0.3); color: #4DA8DD; }
+
+  /* ── EMAIL SIG ── */
+  .email-card {
+    background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .email-preview { padding: 28px 32px; border-bottom: 1px solid var(--border); }
+  .email-actions { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .email-label { font-size: 12px; color: var(--muted); }
+
+  /* ── BANNERS ── */
+  .banner-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
+  .banner-img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
+  .banner-footer { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .banner-name { font-size: 13px; font-weight: 700; color: var(--text); }
+  .banner-spec { font-size: 10px; color: var(--muted); font-family: "Courier New", monospace; margin-top: 2px; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <img class="header-logo" src="assets/logo-horizontal-white.png" alt="Gurufin">
+  <div class="header-right">
+    <span class="header-badge">Design System</span>
+    <span class="header-version">V1.0 · 2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-label">Official Brand System</div>
+    <div class="hero-title">Gurufin<br>Design System</div>
+    <div class="hero-desc">Colors, typography, components, logos, and brand assets for building consistent Gurufin experiences across all platforms.</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-item active" href="#colors">Colors</a>
+  <a class="nav-item" href="#type">Typography</a>
+  <a class="nav-item" href="#components">Components</a>
+  <a class="nav-item" href="#brand">Brand Assets</a>
+  <a class="nav-item" href="#social">Social & Apps</a>
+  <a class="nav-item" href="#banners">Banners</a>
+  <a class="nav-item" href="#docs">Documents</a>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ── COLORS ── -->
+  <section id="colors" class="section">
+    <div class="section-head"><div class="section-name">Colors</div></div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+      <!-- Core -->
+      <div class="token-card">
+        <div class="token-label">Core Brand Colors</div>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-block" style="background:#0A0A0A;"></div><div class="swatch-name">Ink</div><div class="swatch-hex">#0A0A0A</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#0048FF;"></div><div class="swatch-name">Signal Blue</div><div class="swatch-hex">#0048FF</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#0D4689;"></div><div class="swatch-name">Brand Blue</div><div class="swatch-hex">#0D4689</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#4DA8DD;"></div><div class="swatch-name">Sky Blue</div><div class="swatch-hex">#4DA8DD</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#070F1A;border:1px solid #333;"></div><div class="swatch-name">Dark 900</div><div class="swatch-hex">#070F1A</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#F5F8FF;border:1px solid #ddd;"></div><div class="swatch-name">Surface</div><div class="swatch-hex">#F5F8FF</div></div>
+        </div>
+      </div>
+      <!-- Neutrals -->
+      <div class="token-card">
+        <div class="token-label">Neutral Scale</div>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-block" style="background:#363E49;"></div><div class="swatch-name">900</div><div class="swatch-hex">#363E49</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#5B6B7E;"></div><div class="swatch-name">700</div><div class="swatch-hex">#5B6B7E</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#889BB7;"></div><div class="swatch-name">500</div><div class="swatch-hex">#889BB7</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#C6D4E3;"></div><div class="swatch-name">300</div><div class="swatch-hex">#C6D4E3</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#E6EDF5;border:1px solid #ddd;"></div><div class="swatch-name">100</div><div class="swatch-hex">#E6EDF5</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#fff;border:1px solid #ddd;"></div><div class="swatch-name">Paper</div><div class="swatch-hex">#FFFFFF</div></div>
+        </div>
+      </div>
+      <!-- States -->
+      <div class="token-card">
+        <div class="token-label">State / Semantic</div>
+        <div class="swatches">
+          <div class="swatch"><div class="swatch-block" style="background:#40BF43;"></div><div class="swatch-name">Success</div><div class="swatch-hex">#40BF43</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#FF2424;"></div><div class="swatch-name">Danger</div><div class="swatch-hex">#FF2424</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#FF9822;"></div><div class="swatch-name">Warning</div><div class="swatch-hex">#FF9822</div></div>
+          <div class="swatch"><div class="swatch-block" style="background:#5B7CF7;"></div><div class="swatch-name">CTA</div><div class="swatch-hex">#5B7CF7</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TYPOGRAPHY ── -->
+  <section id="type" class="section">
+    <div class="section-head"><div class="section-name">Typography</div></div>
+    <div class="section-divider"></div>
+    <div class="token-card">
+      <div class="token-label">Type Scale — Helvetica Neue</div>
+      <div style="display:flex;flex-direction:column;">
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Display</div><div class="type-meta-spec">54px / 58 · Bold</div></div><div class="type-specimen" style="font-size:42px;font-weight:700;letter-spacing:-0.02em;">84.50</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">H1</div><div class="type-meta-spec">40px / 48 · Bold</div></div><div class="type-specimen" style="font-size:32px;font-weight:700;letter-spacing:-0.01em;">Compliance-grade stability.</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">H2</div><div class="type-meta-spec">28px / 34 · Bold</div></div><div class="type-specimen" style="font-size:24px;font-weight:700;letter-spacing:-0.01em;">Gurufin Chain Infrastructure</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Lead</div><div class="type-meta-spec">18px / 24 · Regular</div></div><div class="type-specimen" style="font-size:18px;font-weight:400;">Programmable rails for modern finance — built to integrate.</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Body</div><div class="type-meta-spec">16px / 24 · Regular</div></div><div class="type-specimen" style="font-size:16px;font-weight:400;">GX Stablecoins are minted when users deposit fiat through licensed partners.</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Label</div><div class="type-meta-spec">12px / 18 · Bold · Caps</div></div><div class="type-specimen" style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Brand Color · Typography · Applications</div></div>
+        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Mono</div><div class="type-meta-spec">16px · Numbers</div></div><div class="type-specimen" style="font-size:15px;font-family:'Courier New',monospace;color:#0D4689;">#0D4689 · 84.50 GX · TXN-0042FF</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMPONENTS ── -->
+  <section id="components" class="section">
+    <div class="section-head"><div class="section-name">Components</div></div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+
+      <!-- Buttons -->
+      <div class="component-card">
+        <div class="component-preview dark">
+          <div class="btn-row" style="margin-bottom:10px;">
+            <button class="ds-btn ds-btn-primary">Get Started →</button>
+            <button class="ds-btn ds-btn-white">WhitePaper →</button>
+            <button class="ds-btn ds-btn-ghost">Learn More</button>
+          </div>
+          <div class="btn-row">
+            <button class="ds-btn ds-btn-primary ds-btn-sm">Small →</button>
+            <button class="ds-btn ds-btn-danger">Danger</button>
+          </div>
+        </div>
+        <div class="component-label">Buttons</div>
+      </div>
+
+      <!-- Badges -->
+      <div class="component-card">
+        <div class="component-preview" style="display:flex;flex-direction:column;gap:10px;">
+          <div class="badge-row">
+            <span class="ds-badge badge-blue">Gurufin Chain</span>
+            <span class="ds-badge badge-signal">GX Stablecoin</span>
+            <span class="ds-badge badge-neutral">IBC</span>
+          </div>
+          <div class="badge-row">
+            <span class="ds-badge badge-success"><span class="dot" style="background:#40BF43;width:6px;height:6px;border-radius:50%;"></span>Confirmed</span>
+            <span class="ds-badge badge-danger">Failed</span>
+            <span class="ds-badge badge-warning">Pending</span>
+          </div>
+        </div>
+        <div class="component-label">Badges & Tags</div>
+      </div>
+
+      <!-- Card -->
+      <div class="component-card">
+        <div class="component-preview">
+          <div class="ds-card-light">
+            <span class="ds-card-pill">Development</span>
+            <div class="ds-card-title">Gurufin Chain: Security Audit</div>
+            <div class="ds-card-body">Building a trusted, resilient L1 for stablecoins. Compliance-grade stability.</div>
+          </div>
+        </div>
+        <div class="component-label">Cards</div>
+      </div>
+
+      <!-- Inputs -->
+      <div class="component-card">
+        <div class="component-preview" style="display:flex;flex-direction:column;gap:12px;">
+          <div><label class="ds-label">Wallet Address</label><input class="ds-input" type="text" placeholder="0x1a2b3c4d…"></div>
+          <div><label class="ds-label">Amount (GX)</label><input class="ds-input" type="text" placeholder="0.00" style="font-family:monospace;border-color:#5B7CF7;box-shadow:0 0 0 3px rgba(91,124,247,0.12);"></div>
+        </div>
+        <div class="component-label">Form Inputs</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── BRAND ASSETS ── -->
+  <section id="brand" class="section">
+    <div class="section-head"><div class="section-name">Brand Assets</div></div>
+    <div class="section-divider"></div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Logo grid -->
+      <div class="logo-grid">
+        <div class="logo-cell dark">
+          <img src="assets/logo-horizontal-white.png" alt="Gurufin logo white">
+          <div class="logo-label" style="color:rgba(255,255,255,0.3);">Horizontal · White on Dark</div>
+        </div>
+        <div class="logo-cell light">
+          <img src="assets/logo-horizontal-black.png" alt="Gurufin logo black">
+          <div class="logo-label">Horizontal · Black on Light</div>
+        </div>
+        <div class="logo-cell dark" style="padding:20px;">
+          <img src="assets/app-icon.png" alt="App icon" style="max-width:72px;border-radius:18px;">
+          <div class="logo-label" style="color:rgba(255,255,255,0.3);">App Icon</div>
+        </div>
+        <div class="logo-cell dark">
+          <svg width="52" height="60" viewBox="0 0 184 212" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.9587 212L184 160.197V54.6786L92.9587 0L0 54.6786V170.752L46.0002 142.932L92.9587 170.752L144.71 141.013V66.1899L55.5836 118.95V87.2937L92.9587 66.1899V44.1266L36.4168 75.7824V128.543L18.2085 139.095V66.1899L92.9587 21.104L165.792 66.1899V149.646L92.9587 192.813V212ZM64.2087 133.339L127.459 95.9272V128.543L92.0004 149.646L64.2087 133.339Z" fill="white"/></svg>
+          <div class="logo-label" style="color:rgba(255,255,255,0.3);">Mark Only · SVG</div>
+        </div>
+      </div>
+
+      <!-- Mascot -->
+      <div class="mascot-card">
+        <img class="mascot-img" src="assets/mascot.png" alt="Golden Wing mascot">
+        <div class="mascot-text">
+          <div class="mascot-name">The Golden Wing</div>
+          <div class="mascot-desc">Gurufin's mascot — inspired by the myth of Garuda. Symbolises speed, protection, and clarity in complex financial systems.</div>
+          <div class="mascot-tags">
+            <span class="mascot-tag">Protective</span>
+            <span class="mascot-tag">Fast & Precise</span>
+            <span class="mascot-tag">Myth-Inspired</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brand Guidelines Figma -->
+      <div class="figma-card">
+        <div class="figma-cover">
+          <img src="assets/brand-guideline-ppt-cover.png" alt="Brand Style Guideline">
+        </div>
+        <div class="figma-footer">
+          <div>
+            <div class="figma-info-name">Brand Style Guideline</div>
+            <div class="figma-info-meta">Figma Slides · V1.0 — 2026 · Official brand system for GURUFIN</div>
+          </div>
+          <a class="dl-btn" href="https://www.figma.com/slides/TUAIt7vh9z9GVeY0ztJjZe" target="_blank">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13a6 6 0 0 1-6 6H5a6 6 0 0 1 0-12h3"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+            Open in Figma
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SOCIAL & APPS ── -->
+  <section id="social" class="section">
+    <div class="section-head"><div class="section-name">Social & Apps</div></div>
+    <div class="section-divider"></div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="links-grid">
+        <div class="link-card">
+          <div class="link-top">
+            <div class="link-avatar" style="background:#000;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></div>
+            <div><div class="link-name">GurufinHQ</div><div class="link-sub">@GurufinHQ · Official X account</div></div>
+          </div>
+          <div class="link-divider"></div>
+          <div class="link-desc">News, product updates, blockchain insights, and GX Stablecoin announcements.</div>
+          <a class="link-btn" href="https://x.com/GurufinHQ" target="_blank" style="background:#000;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622Zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            Follow on X
+          </a>
+        </div>
+        <div class="link-card">
+          <div class="link-top">
+            <div class="link-avatar" style="background:#0A66C2;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></div>
+            <div><div class="link-name">Gurufin</div><div class="link-sub">LinkedIn · Official company page</div></div>
+          </div>
+          <div class="link-divider"></div>
+          <div class="link-desc">Company news, career opportunities, and financial infrastructure insights.</div>
+          <a class="link-btn" href="https://www.linkedin.com/company/gurufin/posts/?feedView=all" target="_blank" style="background:#0A66C2;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            Follow on LinkedIn
+          </a>
+        </div>
+      </div>
+      <!-- Telegram -->
+      <div class="links-grid" style="margin-top:16px;">
+        <div class="link-card">
+          <div class="link-top">
+            <div class="link-avatar" style="background:#229ED9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div>
+            <div><div class="link-name">Gurufin Community</div><div class="link-sub">Telegram · Official community</div></div>
+          </div>
+          <div class="link-divider"></div>
+          <div class="link-desc">Join the Gurufin Telegram community for real-time updates, discussions, and support.</div>
+          <a class="link-btn" href="https://t.me/gurufincommunity" target="_blank" style="background:#229ED9;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            Join on Telegram
+          </a>
+        </div>
+      </div>
+      <div class="app-grid">
+        <div class="app-card">
+          <div class="app-icon" style="background:#01875F;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M17.523 15.341 14.47 12l3.053-3.341L21 12l-3.477 3.341ZM3 12l3.477-3.341L9.53 12l-3.053 3.341L3 12Zm9-7.795L7.545 8.659l-1.318-1.25L12 2.205l5.773 5.204-1.318 1.25L12 4.205ZM7.545 15.341l1.318 1.25L12 19.795l3.137-3.204 1.318-1.25L12 21.795 7.545 15.341Z"/></svg></div>
+          <div><div class="app-name">Android</div><div class="app-store">Google Play</div></div>
+          <a class="app-btn" href="https://play.google.com/store/apps/details?id=com.gurufin.wallet" target="_blank" style="background:#01875F;">Google Play →</a>
+        </div>
+        <div class="app-card">
+          <div class="app-icon" style="background:#0D4689;"><svg width="30" height="30" viewBox="0 0 24 24" fill="white"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></div>
+          <div><div class="app-name">iOS</div><div class="app-store">App Store</div></div>
+          <a class="app-btn" href="https://apps.apple.com/kr/app/gurufin-wallet-lite/id6740982061" target="_blank" style="background:#0D4689;">App Store →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BANNERS ── -->
+  <section id="banners" class="section">
+    <div class="section-head"><div class="section-name">Banners</div></div>
+    <div class="section-divider"></div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="banner-card">
+        <img class="banner-img" src="assets/banner-x.png" alt="X banner">
+        <div class="banner-footer">
+          <div><div class="banner-name">X (Twitter) Banner</div><div class="banner-spec">PNG · 1500 × 500 px</div></div>
+          <button class="dl-btn" onclick="dlFile('assets/banner-x.png','gurufin-x-banner.png')">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download PNG
+          </button>
+        </div>
+      </div>
+      <div class="banner-card">
+        <img class="banner-img" src="assets/banner-linkedin.png" alt="LinkedIn banner">
+        <div class="banner-footer">
+          <div><div class="banner-name">LinkedIn Banner</div><div class="banner-spec">PNG · 1584 × 396 px</div></div>
+          <button class="dl-btn" onclick="dlFile('assets/banner-linkedin.png','gurufin-linkedin-banner.png')">
+            <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 3v13M7 11l5 5 5-5"/><path d="M5 21h14"/></svg>
+            Download PNG
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DOCUMENTS ── -->
+  <section id="docs" class="section">
+    <div class="section-head"><div class="section-name">Document Templates</div></div>
+    <div class="section-divider"></div>
+    <div class="grid-2">
+      <div class="component-card">
+        <div class="component-preview" style="background:#E8EDF2;display:flex;align-items:center;justify-content:center;min-height:220px;">
+          <img src="assets/doc-template-formal.png" alt="Formal letterhead" style="max-height:200px;border-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+        </div>
+        <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div><div style="font-size:13px;font-weight:700;">Formal Letterhead</div><div style="font-size:11px;color:#888;margin-top:2px;">Blue sidebar · official correspondence</div></div>
+          <div style="display:flex;gap:6px;">
+            <button class="dl-btn" onclick="dlFile('assets/doc-template-formal.png','gurufin-letterhead-formal.png')">PNG</button>
+            <button class="dl-btn" style="background:transparent;color:#0D4689;border:1.5px solid #0D4689;" onclick="dlFile('assets/doc-template-formal.pdf','gurufin-letterhead-formal.pdf')">PDF</button>
+          </div>
+        </div>
+      </div>
+      <div class="component-card">
+        <div class="component-preview" style="background:#E8EDF2;display:flex;align-items:center;justify-content:center;min-height:220px;">
+          <img src="assets/doc-template-simple.png" alt="Simple letterhead" style="max-height:200px;border-radius:4px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+        </div>
+        <div style="padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;">
+          <div><div style="font-size:13px;font-weight:700;">Simple Letterhead</div><div style="font-size:11px;color:#888;margin-top:2px;">Clean layout · general communication</div></div>
+          <div style="display:flex;gap:6px;">
+            <button class="dl-btn" onclick="dlFile('assets/doc-template-simple.png','gurufin-letterhead-simple.png')">PNG</button>
+            <button class="dl-btn" style="background:transparent;color:#0D4689;border:1.5px solid #0D4689;" onclick="dlFile('assets/doc-template-simple.pdf','gurufin-letterhead-simple.pdf')">PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMAIL SIGNATURE -->
+  <section class="section">
+    <div class="section-head"><div class="section-name">Email Signature</div></div>
+    <div class="section-divider"></div>
+    <div class="email-card">
+      <div class="email-preview">
+        <table cellpadding="0" cellspacing="0" border="0" style="font-family:Helvetica,Arial,sans-serif;background:#ffffff;">
+          <tr>
+            <td style="padding:14px 20px 14px 0;vertical-align:middle;text-align:center;white-space:nowrap;">
+              <svg width="25" height="29" viewBox="0 0 184 212" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.9587 212L184 160.197V54.6786L92.9587 0L0 54.6786V170.752L46.0002 142.932L92.9587 170.752L144.71 141.013V66.1899L55.5836 118.95V87.2937L92.9587 66.1899V44.1266L36.4168 75.7824V128.543L18.2085 139.095V66.1899L92.9587 21.104L165.792 66.1899V149.646L92.9587 192.813V212ZM64.2087 133.339L127.459 95.9272V128.543L92.0004 149.646L64.2087 133.339Z" fill="#0D4689"/></svg>
+              <div style="margin-top:5px;font-size:7.5px;font-weight:700;letter-spacing:0.18em;color:#0D4689;text-transform:uppercase;">GURUFIN</div>
+            </td>
+            <td style="padding:14px 0;vertical-align:middle;">
+              <div style="font-size:13px;color:#0A0A0A;line-height:1.3;"><strong>Jack Reno</strong> <span style="font-weight:400;color:#444;">| Senior Manager</span></div>
+              <div style="font-size:11px;color:#888888;margin-top:4px;">11, Yeoksam-ro 3-gil, Gangnam-gu, Seoul 9th floor</div>
+              <div style="font-size:11px;color:#444444;margin-top:6px;">
+                <span style="font-weight:700;color:#0D4689;">W</span>&nbsp;<a href="https://www.gurufin.com" style="color:#444444;text-decoration:none;">www.gurufin.com</a><br>
+                <span style="font-weight:700;color:#0D4689;">E</span>&nbsp;<a href="/cdn-cgi/l/email-protection#f19b90929ab19684838497989fdf929e9c" style="color:#444444;text-decoration:none;"><span class="__cf_email__" data-cfemail="86ece7e5edc6e1f3f4f3e0efe8a8e5e9eb">[email&#160;protected]</span></a>&nbsp;&nbsp;&nbsp;<span style="font-weight:700;color:#0D4689;">M</span>&nbsp;+82 010 XXXX XXXX
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="email-actions">
+        <span class="email-label">Customise name, title, email and phone →</span>
+        <a class="dl-btn" href="preview/email-signature.html" target="_blank">Open Generator</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer style="background:#070F1A;padding:32px 48px;margin-top:48px;border-top:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:space-between;">
+  <img src="assets/logo-horizontal-white.png" alt="Gurufin" style="height:22px;">
+  <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:'Courier New',monospace;">Design System V1.0 · 2026 · gurufin.com</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+async function dlFile(url, filename) {
+  try {
+    const res = await fetch(url);
+    const blob = await res.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  } catch(e) { alert('Download failed: ' + e.message); }
+}
+
+// Smooth scroll nav
+document.querySelectorAll('.nav-item').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      const offset = 130;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+    document.querySelectorAll('.nav-item').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+  });
+});
+
+// Active nav on scroll
+const sections = document.querySelectorAll('section[id]');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 140) current = s.id; });
+  document.querySelectorAll('.nav-item').forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+</body>
+</html>

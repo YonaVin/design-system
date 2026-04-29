@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: var(--color-paper); padding: 20px; }
+  .row { display: flex; gap: 12px; }
+  .swatch { flex: 1; }
+  .color-block { height: 64px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; }
+  .pill { font-size: 11px; font-weight: 700; color: #fff; letter-spacing: 0.04em; background: rgba(0,0,0,0.2); padding: 3px 10px; border-radius: 99px; }
+  .label { margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--color-neutral-900); }
+  .hex { font-size: 10px; color: var(--color-neutral-700); font-family: var(--font-mono); }
+</style>
+</head><body>
+<div class="row">
+  <div class="swatch">
+    <div class="color-block" style="background:#40BF43;"><span class="pill">Success</span></div>
+    <div class="label">Success</div><div class="hex">#40BF43</div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#FF2424;"><span class="pill">Danger</span></div>
+    <div class="label">Danger</div><div class="hex">#FF2424</div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#FF9822;"><span class="pill">Warning</span></div>
+    <div class="label">Warning</div><div class="hex">#FF9822</div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#0048FF;"><span class="pill">CTA / Link</span></div>
+    <div class="label">Signal Blue</div><div class="hex">#0048FF</div>
+  </div>
+</div>
+</body></html>

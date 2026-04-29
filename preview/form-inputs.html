@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--font-sans); background: #F5F8FF; padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+  .label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: rgba(0,0,0,0.35); margin-bottom: 5px; }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #5B6B7E; }
+
+  input, select {
+    font-family: var(--font-sans); font-size: 14px; color: #0A0A0A;
+    background: #fff;
+    border: 1.5px solid #DFE0E4;
+    border-radius: 12px; padding: 11px 16px; outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    width: 100%;
+  }
+  input::placeholder { color: #A0AABB; }
+  input:focus, select:focus {
+    border-color: #5B7CF7;
+    box-shadow: 0 0 0 3px rgba(91,124,247,0.12);
+  }
+  input.success { border-color: #40BF43; }
+  input.error { border-color: #FF2424; }
+  .hint { font-size: 11px; color: #8899AA; }
+  .hint.ok { color: #2AA82D; }
+  .hint.err { color: #CC1C1C; }
+
+  .row { display: flex; gap: 12px; }
+  .row .field { flex: 1; }
+
+  select { color: #0A0A0A; appearance: none; cursor: pointer; }
+</style>
+</head><body>
+
+  <div class="row">
+    <div class="field">
+      <div class="field-label">Wallet Address</div>
+      <input type="text" placeholder="0x1a2b3c4d…" />
+    </div>
+    <div class="field">
+      <div class="field-label">Amount (GX)</div>
+      <input type="text" placeholder="0.00" style="font-family:monospace;" />
+    </div>
+  </div>
+
+  <div class="field">
+    <div class="field-label">Email</div>
+    <input type="email" class="success" value="jack@gurufin.com" />
+    <span class="hint ok">✓ Valid email address</span>
+  </div>
+
+  <div class="field">
+    <div class="field-label">Transaction ID</div>
+    <input type="text" class="error" value="TXN-???" />
+    <span class="hint err">Invalid transaction ID format</span>
+  </div>
+
+  <div class="field">
+    <div class="field-label">Network</div>
+    <select>
+      <option>Gurufin Chain (native)</option>
+      <option>IBC Bridge → Cosmos</option>
+      <option>IBC Bridge → Ethereum</option>
+    </select>
+  </div>
+
+</body></html>
