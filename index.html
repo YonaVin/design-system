@@ -997,11 +997,60 @@
   .email-label { font-size: 12px; color: var(--muted); }
 
   /* ── BANNERS ── */
-  .banner-card { background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border); overflow: hidden; }
-  .banner-img { width: 100%; display: block; border-bottom: 1px solid var(--border); }
-  .banner-footer { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .banner-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+  }
+  .banner-preview {
+    flex-shrink: 0;
+    height: clamp(132px, 20vw, 176px);
+    box-sizing: border-box;
+    background: #ECEFF5;
+    border-bottom: 1px solid var(--border);
+    padding: clamp(12px, 2vw, 20px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .banner-img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .banner-footer {
+    flex: 1 1 auto;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
   .banner-name { font-size: 13px; font-weight: 700; color: var(--text); }
   .banner-spec { font-size: 10px; color: var(--muted); font-family: "Courier New", monospace; margin-top: 2px; }
+  .banner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  .banner-grid > .banner-card { min-width: 0; }
+  @media (max-width: 720px) {
+    .banner-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .banner-footer { flex-wrap: wrap; }
+  }
 </style>
 </head>
 <body>
@@ -1478,9 +1527,11 @@
   <section id="banners" class="section">
     <div class="section-head"><div class="section-name">Banners</div></div>
     <div class="section-divider"></div>
-    <div style="display:flex;flex-direction:column;gap:16px;">
+    <div class="banner-grid">
       <div class="banner-card">
-        <img class="banner-img" src="assets/banner-x.png" alt="X banner">
+        <div class="banner-preview">
+          <img class="banner-img" src="assets/banner-x.png" alt="X banner">
+        </div>
         <div class="banner-footer">
           <div><div class="banner-name">X (Twitter) Banner</div><div class="banner-spec">PNG · 1500 × 500 px</div></div>
           <button class="dl-btn" onclick="dlFile('assets/banner-x.png','gurufin-x-banner.png')">
@@ -1490,7 +1541,9 @@
         </div>
       </div>
       <div class="banner-card">
-        <img class="banner-img" src="assets/banner-linkedin.png" alt="LinkedIn banner">
+        <div class="banner-preview">
+          <img class="banner-img" src="assets/banner-linkedin.png" alt="LinkedIn banner">
+        </div>
         <div class="banner-footer">
           <div><div class="banner-name">LinkedIn Banner</div><div class="banner-spec">PNG · 1584 × 396 px</div></div>
           <button class="dl-btn" onclick="dlFile('assets/banner-linkedin.png','gurufin-linkedin-banner.png')">
