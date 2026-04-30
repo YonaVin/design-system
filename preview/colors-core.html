@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <link rel="stylesheet" href="../colors_and_type.css">
+<title>Core — Gurufin palette</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--font-sans); background: var(--color-paper); padding: 20px; }
-  .row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .swatch { display: flex; flex-direction: column; flex: 1; min-width: 100px; }
-  .color-block { height: 72px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.08); }
-  .label { margin-top: 6px; font-size: 11px; font-weight: 700; color: var(--color-neutral-900); letter-spacing: 0.03em; }
-  .hex { font-size: 10px; color: var(--color-neutral-700); font-family: var(--font-mono); margin-top: 2px; }
+  body { font-family: var(--font-sans); background: #F0F8FF; padding: 24px; color: #0A0A0A; }
+  .label-row { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6B7280; margin-bottom: 10px; }
+  .row { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: 14px; max-width: 900px; }
+  .swatch { background: #fff; border-radius: 11px; overflow: hidden; border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 4px 12px rgba(15,23,42,0.05); }
+  .chip { height: 102px; border-bottom: 1px solid rgba(0,0,0,0.06); box-sizing: border-box; }
+  .chip-bordered { border: 1px solid #D1D9E5; box-sizing: border-box; }
+  .cap { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 3px; min-height: 52px; justify-content: center; }
+  .name { font-size: 12px; font-weight: 700; }
+  .hex { font-size: 11px; color: #6b7280; font-family: var(--font-mono); }
 </style>
 </head><body>
+<div class="label-row">Core</div>
 <div class="row">
   <div class="swatch">
-    <div class="color-block" style="background:#0A0A0A;"></div>
-    <div class="label">Ink</div><div class="hex">#0A0A0A</div>
+    <div class="chip" style="background:#0A0A0A;"></div>
+    <div class="cap"><div class="name">Ink</div><div class="hex">#0A0A0A</div></div>
   </div>
   <div class="swatch">
-    <div class="color-block" style="background:#0048FF;"></div>
-    <div class="label">Signal Blue</div><div class="hex">#0048FF</div>
+    <div class="chip" style="background:#0048FF;"></div>
+    <div class="cap"><div class="name">Signal Blue</div><div class="hex">#0048FF</div></div>
   </div>
   <div class="swatch">
-    <div class="color-block" style="background:#0D4689;"></div>
-    <div class="label">Brand Blue</div><div class="hex">#0D4689</div>
+    <div class="chip" style="background:#0D4689;"></div>
+    <div class="cap"><div class="name">Brand Blue</div><div class="hex">#0D4689</div></div>
   </div>
   <div class="swatch">
-    <div class="color-block" style="background:#4DA8DD;"></div>
-    <div class="label">Sky Blue</div><div class="hex">#4DA8DD</div>
+    <div class="chip" style="background:#4DA8DD;"></div>
+    <div class="cap"><div class="name">Sky Blue</div><div class="hex">#4DA8DD</div></div>
   </div>
   <div class="swatch">
-    <div class="color-block" style="background:#070F1A;border-color:rgba(255,255,255,0.15);"></div>
-    <div class="label">Dark 900</div><div class="hex">#070F1A</div>
+    <div class="chip" style="background:#070F1A;"></div>
+    <div class="cap"><div class="name">Dark 900</div><div class="hex">#070F1A</div></div>
   </div>
   <div class="swatch">
-    <div class="color-block" style="background:#F5F8FF;"></div>
-    <div class="label">Surface</div><div class="hex">#F5F8FF</div>
+    <div class="chip chip-bordered" style="background:#F5F8FF;"></div>
+    <div class="cap"><div class="name">Surface</div><div class="hex">#F5F8FF</div></div>
   </div>
 </div>
 </body></html>

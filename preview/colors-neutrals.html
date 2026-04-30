@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
 <link rel="stylesheet" href="../colors_and_type.css">
+<title>Neutrals — Gurufin palette</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: var(--font-sans); background: var(--color-paper); padding: 20px; }
-  .row { display: flex; gap: 10px; }
-  .swatch { flex: 1; }
-  .color-block { height: 56px; border-radius: var(--radius-md); border: 1px solid rgba(0,0,0,0.06); }
-  .label { margin-top: 5px; font-size: 10px; font-weight: 700; color: var(--color-neutral-900); letter-spacing: 0.03em; }
-  .hex { font-size: 9px; color: var(--color-neutral-700); font-family: var(--font-mono); }
+  body { font-family: var(--font-sans); background: #F0F8FF; padding: 24px; color: #0A0A0A; }
+  .label-row { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #6B7280; margin-bottom: 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .swatch { flex: 1; min-width: 80px; max-width: 160px; display: flex; flex-direction: column; }
+  .color-block { height: 72px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.08); }
+  .hex-only { margin-top: 8px; font-size: 11px; font-weight: 600; font-family: var(--font-mono); }
 </style>
 </head><body>
+<div class="label-row">Neutrals</div>
 <div class="row">
-  <div class="swatch"><div class="color-block" style="background:#363E49;"></div><div class="label">900</div><div class="hex">#363E49</div></div>
-  <div class="swatch"><div class="color-block" style="background:#5B6B7E;"></div><div class="label">700</div><div class="hex">#5B6B7E</div></div>
-  <div class="swatch"><div class="color-block" style="background:#889BB7;"></div><div class="label">500</div><div class="hex">#889BB7</div></div>
-  <div class="swatch"><div class="color-block" style="background:#C6D4E3;"></div><div class="label">300</div><div class="hex">#C6D4E3</div></div>
-  <div class="swatch"><div class="color-block" style="background:#E6EDF5;"></div><div class="label">100</div><div class="hex">#E6EDF5</div></div>
-  <div class="swatch"><div class="color-block" style="background:#F0F8FF;border:1px solid #DFE0E4;"></div><div class="label">50</div><div class="hex">#F0F8FF</div></div>
-  <div class="swatch"><div class="color-block" style="background:#FFFFFF;border:1px solid #DFE0E4;"></div><div class="label">Paper</div><div class="hex">#FFFFFF</div></div>
+  <div class="swatch"><div class="color-block" style="background:#363E49;"></div><div class="hex-only">#363E49</div></div>
+  <div class="swatch"><div class="color-block" style="background:#5B6B7E;"></div><div class="hex-only">#5B6B7E</div></div>
+  <div class="swatch"><div class="color-block" style="background:#889BB7;"></div><div class="hex-only">#889BB7</div></div>
+  <div class="swatch"><div class="color-block" style="background:#C6D4E3;"></div><div class="hex-only">#C6D4E3</div></div>
+  <div class="swatch"><div class="color-block" style="background:#F0F8FF;border:1px solid #DFE0E4;"></div><div class="hex-only">#F0F8FF</div></div>
 </div>
 </body></html>

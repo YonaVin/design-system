@@ -103,6 +103,9 @@
   .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .grid-1 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+  @media (max-width: 720px) {
+    .grid-2 { grid-template-columns: 1fr; }
+  }
 
   /* ── TOKEN CARD ── */
   .token-card {
@@ -118,6 +121,426 @@
   .swatch-name { font-size: 10px; font-weight: 700; color: var(--text); }
   .swatch-hex { font-size: 9px; color: var(--muted); font-family: "Courier New", monospace; }
 
+  .brand-color-doc {
+    background: #FAFAFB;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px 32px 32px;
+    margin-top: 28px;
+  }
+  .brand-color-doc-intro-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 14px;
+  }
+  .brand-color-heading {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: var(--text);
+    line-height: 1.15;
+  }
+  .brand-color-doc-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #8896a8;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+  .brand-color-lede {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #4a5568;
+    margin: 0 0 22px;
+    max-width: 52rem;
+  }
+  .brand-color-code-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8896a8;
+    margin-bottom: 20px;
+  }
+  .brand-color-doc .color-code-stack {
+    gap: 28px;
+  }
+
+  /* ── COLOR PALETTE (compact grid card) ── */
+  .color-palette-sheet {
+    background: linear-gradient(165deg, #F5F9FF 0%, #EEF4FB 52%, #F2F6FA 100%);
+    border: 1px solid rgba(13, 70, 137, 0.08);
+    border-radius: 16px;
+    padding: 36px 40px 40px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  }
+  .color-palette-preamble {
+    margin-bottom: 28px;
+  }
+  .color-palette-preamble-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  .color-palette-brand-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #8896a8;
+    flex-shrink: 0;
+    margin-top: 6px;
+  }
+  .color-palette-title {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    margin-bottom: 16px;
+    color: var(--text);
+    line-height: 1.15;
+  }
+  .color-palette-lede {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #4a5568;
+    margin-bottom: 24px;
+    max-width: 52rem;
+  }
+  .color-palette-lede--preamble {
+    margin-bottom: 0;
+    max-width: 52rem;
+  }
+  .color-palette-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 300px) 1fr;
+    gap: 32px 40px;
+    align-items: start;
+  }
+  .color-palette-eyebrow {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.11em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .color-rules {
+    border: 1px solid #D8DEE8; border-radius: 10px;
+    padding: 18px 20px; background: #fff;
+    box-shadow: 0 1px 2px rgba(10, 22, 40, 0.04);
+  }
+  .color-rules-title {
+    font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 14px; color: var(--text);
+  }
+  .color-rules ul {
+    margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; color: #374151;
+  }
+  .color-rules li { margin-bottom: 8px; }
+  .color-rules li:last-child { margin-bottom: 0; }
+
+  .palette-group { margin-bottom: 12px; }
+  .palette-group:last-child { margin-bottom: 0; }
+  .palette-group-label {
+    font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    color: #8896a8; margin-bottom: 6px;
+  }
+  .palette-row-swatches {
+    display: grid; gap: 8px;
+  }
+  /* Три строки: 6 · 4 · 5 карточек */
+  .palette-row-swatches--core {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+  .palette-row-swatches--accent { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .palette-row-swatches--neutral { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+  /* Компактные карточки цвета */
+  .palette-swatch-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+  }
+  .palette-swatch-chip {
+    height: 52px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-sizing: border-box;
+  }
+  .palette-swatch-chip--bordered {
+    border: 1px solid #D1D9E5;
+    border-bottom: 1px solid #D1D9E5;
+    box-sizing: border-box;
+  }
+  .palette-swatch-caption {
+    padding: 6px 8px 7px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    min-height: 0;
+    justify-content: center;
+  }
+  .palette-swatch-caption--hex-only {
+    align-items: center;
+    text-align: center;
+    padding: 7px 6px 8px;
+  }
+  .palette-swatch-name {
+    font-size: 10px; font-weight: 700; color: var(--text);
+    letter-spacing: -0.01em; line-height: 1.2;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .palette-swatch-hex {
+    font-size: 9px; color: #6b7280; font-family: "Courier New", monospace; font-weight: 500;
+    line-height: 1.2;
+  }
+  .palette-swatch-caption--hex-only .palette-swatch-hex {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* COLOR CODE bands (Ink + Brand Blue) — можно внутри .brand-color-doc */
+  .color-code-panel {
+    margin-top: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+  }
+  .color-code-stack { display: flex; flex-direction: column; gap: 32px; }
+  .color-code-band {
+    display: grid;
+    grid-template-columns: 128px minmax(90px, 120px) 1fr;
+    gap: 20px 28px;
+    align-items: start;
+  }
+  .color-code-swatch {
+    width: 128px;
+    height: 128px;
+    border-radius: 14px;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    flex-shrink: 0;
+  }
+  .color-code-swatch-hex {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    font-family: "Courier New", monospace;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+  }
+  .color-code-rgba {
+    font-size: 12px;
+    font-family: "Courier New", monospace;
+    color: #4b5563;
+    line-height: 1.7;
+    padding-top: 2px;
+  }
+  .color-code-rgba-row { white-space: nowrap; }
+  .rgba-val { opacity: 0.9; font-weight: 500; }
+  .color-code-use-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  .color-code-use-desc {
+    font-size: 14px;
+    line-height: 1.58;
+    color: #4a5568;
+    max-width: 48rem;
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .color-code-band {
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+    .color-code-swatch { width: 100%; height: auto; aspect-ratio: 1; max-width: 160px; }
+    .brand-color-doc { padding: 22px 18px 26px; }
+    .palette-row-swatches--core { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .palette-row-swatches--accent { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .palette-row-swatches--neutral { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 900px) {
+    .color-palette-layout { grid-template-columns: 1fr; }
+    .color-palette-sheet { padding: 28px 22px 32px; }
+  }
+  @media (max-width: 420px) {
+    .palette-row-swatches--core,
+    .palette-row-swatches--accent,
+    .palette-row-swatches--neutral { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  /* ── TYPOGRAPHY SECTION (guideline layout + preserved scale rows) ── */
+  .type-page-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(340px, 1.08fr);
+    gap: 40px 44px;
+    align-items: start;
+  }
+  .type-hero-heading {
+    font-size: clamp(26px, 2.8vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.14;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+  .type-hero-lede {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #4b5568;
+    margin-bottom: 24px;
+    max-width: 36rem;
+  }
+  .type-usage-cards {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 22px;
+  }
+  .type-usage-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px 16px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  }
+  .type-usage-card-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8896a8;
+    margin-bottom: 10px;
+  }
+  .type-usage-card-main {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+  }
+  .type-usage-card-sub {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+  .type-tone-card {
+    background: #FAFAFB;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px 22px;
+  }
+  .type-tone-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: #8896a8;
+    margin-bottom: 12px;
+  }
+  .type-tone-headline {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .type-tone-body {
+    font-size: 14px;
+    line-height: 1.58;
+    color: #525a66;
+    margin: 0;
+    max-width: 36rem;
+  }
+  .type-scale-card { padding-top: 16px; }
+  .type-scale-card-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .type-scale-card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .type-scale-card-hint {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #9ca3af;
+  }
+  .type-mini-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .type-mini-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 18px 20px;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  }
+  .type-mini-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8896a8;
+    margin-bottom: 10px;
+  }
+  .type-mini-card-sample {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--text);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .type-mini-card-desc {
+    font-size: 13px;
+    line-height: 1.48;
+    color: #525a66;
+    margin: 0;
+  }
+  .type-mini-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+    line-height: 1.25;
+  }
+  @media (max-width: 960px) {
+    .type-page-layout { grid-template-columns: 1fr; gap: 32px; }
+    .type-usage-cards { grid-template-columns: 1fr; }
+    .type-mini-cards { grid-template-columns: 1fr; }
+  }
+
   /* ── TYPE SPECIMEN ── */
   .type-row { display: flex; align-items: baseline; gap: 20px; padding: 14px 0; border-bottom: 1px solid var(--border); }
   .type-row:last-child { border-bottom: none; padding-bottom: 0; }
@@ -125,14 +548,301 @@
   .type-meta-name { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
   .type-meta-spec { font-size: 9px; color: #aaa; font-family: "Courier New", monospace; margin-top: 2px; }
   .type-specimen { color: var(--text); }
+  .type-scale-card .type-meta-name { color: var(--text); letter-spacing: 0.06em; }
+  .type-scale-card .type-meta-spec { color: #6b7280; font-size: 10px; }
 
-  /* ── LOGO GRID ── */
-  .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .logo-cell { border-radius: 14px; padding: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border: 1px solid var(--border); }
-  .logo-cell.dark { background: #070F1A; border-color: rgba(255,255,255,0.1); }
-  .logo-cell.light { background: var(--page-bg); }
-  .logo-cell img { max-width: 160px; height: auto; display: block; }
-  .logo-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); text-align: center; }
+  /* ── BRAND ASSETS SUBSECTIONS ── */
+  .brand-assets-stack {
+    display: flex;
+    flex-direction: column;
+  }
+  .brand-asset-block + .brand-asset-block {
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+  }
+  .brand-asset-heading {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  /* ── APPROVED LOGO SYSTEM ── */
+  .logo-system { display: flex; flex-direction: column; gap: 18px; }
+  .logo-system-head-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px 20px;
+  }
+  .logo-system-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .logo-system-main-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    width: 100%;
+    line-height: 1.2;
+  }
+  .logo-system-desc {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #666;
+    max-width: 720px;
+    margin: 0;
+  }
+  .logo-system-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .logo-system-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .logo-system-grid { grid-template-columns: 1fr; }
+  }
+  .logo-system-card {
+    position: relative;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    min-height: 168px;
+    padding: 32px 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .logo-system-card-label {
+    position: absolute;
+    top: 12px;
+    left: 14px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .logo-system-card--light {
+    background: #fff;
+  }
+  .logo-system-card--dark {
+    background: #000;
+    border-color: rgba(255,255,255,0.12);
+  }
+  .logo-system-card--dark .logo-system-card-label {
+    color: rgba(255,255,255,0.42);
+  }
+  .logo-system-card--neutral {
+    background: #262626;
+    border-color: rgba(255,255,255,0.08);
+  }
+  .logo-system-card--neutral .logo-system-card-label {
+    color: rgba(255,255,255,0.42);
+  }
+  /* Media logo: PNG on white tray so dark-on-black artwork reads clearly */
+  .logo-system-card--media {
+    background: #fff;
+    border-color: var(--border);
+    min-height: 220px;
+    padding-bottom: 28px;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  .logo-system-card--media .logo-system-card-label {
+    color: var(--muted);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .logo-system-media-only {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex: 1;
+    padding: 8px 12px 0;
+    margin-top: 8px;
+  }
+  .logo-system-media-only img.logo-system-media-img {
+    max-width: min(200px, 88%);
+    max-height: clamp(100px, 26vw, 180px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .logo-system-card img.logo-system-shot {
+    max-width: min(260px, 92%);
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  .logo-system-card img.logo-system-app {
+    max-width: 100px;
+    max-height: 100px;
+    width: auto;
+    height: auto;
+    border-radius: 22px;
+    display: block;
+  }
+  .logo-system-duo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(12px, 3vw, 24px);
+    width: 100%;
+  }
+  .logo-system-duo img.logo-system-shot {
+    max-width: 44%;
+    max-height: 102px;
+  }
+  .logo-system-stack-lockup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: #0A0A0A;
+    padding-top: 6px;
+  }
+  .logo-system-stack-lockup svg.lg-sys-mark {
+    width: clamp(52px, 12vw, 68px);
+    height: auto;
+    flex-shrink: 0;
+  }
+  .logo-system-stack-lockup .logo-system-stack-type {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: clamp(16px, 3vw, 21px);
+    letter-spacing: 0.072em;
+    line-height: 1;
+    color: #0A0A0A;
+  }
+
+  /* ── LOGO CONSTRUCTION (before Approved Logo System) ── */
+  .logo-construction {
+    margin-bottom: 32px;
+    padding: 22px 22px 26px;
+    background: #F5F8FF;
+    border-radius: 18px;
+    border: 1px solid rgba(23,37,61,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .logo-construction-main {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.06fr);
+    gap: clamp(20px, 4vw, 40px);
+    align-items: stretch;
+  }
+  @media (max-width: 820px) {
+    .logo-construction-main { grid-template-columns: 1fr; }
+  }
+  .logo-construction-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+  .logo-construction-intro {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #666;
+    margin: 0 0 20px;
+    max-width: 36em;
+  }
+  .logo-construction-specs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .logo-construction-spec-card {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 14px 16px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  .logo-construction-spec-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .logo-construction-spec-body {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #444;
+  }
+  /* Built diagram (no raster): white tray → tinted inner → dashed clear space → mark */
+  .logo-construction-stage {
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid rgba(23,37,61,0.08);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    padding: clamp(20px, 4vw, 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .logo-construction-stage-inset {
+    width: 100%;
+    max-width: 340px;
+    margin: 0 auto;
+    background: #E9EDF5;
+    border-radius: 14px;
+    padding: clamp(28px, 8vw, 52px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-construction-safe {
+    border: 1px dashed rgba(105,117,146,0.45);
+    border-radius: 8px;
+    padding: clamp(22px, 6vw, 40px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+  .logo-construction-safe svg.lc-mark {
+    width: clamp(76px, 18vw, 118px);
+    height: auto;
+    display: block;
+    color: #0A0A0A;
+  }
+  .logo-construction-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 0;
+    width: 100%;
+  }
 
   /* ── COMPONENT PREVIEW ── */
   .component-card {
@@ -205,7 +915,18 @@
   .dl-btn:hover { opacity: 0.85; }
 
   /* ── SOCIAL / LINKS ── */
-  .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    align-items: stretch;
+  }
+  @media (max-width: 900px) {
+    .links-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 560px) {
+    .links-grid { grid-template-columns: 1fr; }
+  }
   .link-card {
     background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border);
     padding: 20px; display: flex; flex-direction: column; gap: 12px;
@@ -299,7 +1020,7 @@
   <div class="hero-inner">
     <div class="hero-label">Official Brand System</div>
     <div class="hero-title">Gurufin<br>Design System</div>
-    <div class="hero-desc">Colors, typography, components, logos, and brand assets for building consistent Gurufin experiences across all platforms.</div>
+    <div class="hero-desc">Colors, typography, logos, and brand assets for building consistent Gurufin experiences across all platforms.</div>
   </div>
 </div>
 
@@ -307,11 +1028,12 @@
 <nav class="nav">
   <a class="nav-item active" href="#colors">Colors</a>
   <a class="nav-item" href="#type">Typography</a>
-  <a class="nav-item" href="#components">Components</a>
   <a class="nav-item" href="#brand">Brand Assets</a>
   <a class="nav-item" href="#social">Social & Apps</a>
   <a class="nav-item" href="#banners">Banners</a>
   <a class="nav-item" href="#docs">Documents</a>
+  <a class="nav-item" href="#email-signature">Email Signature</a>
+  <a class="nav-item" href="#business-card">Business Card</a>
 </nav>
 
 <!-- MAIN -->
@@ -319,41 +1041,182 @@
 
   <!-- ── COLORS ── -->
   <section id="colors" class="section">
-    <div class="section-head"><div class="section-name">Colors</div></div>
+    <div class="section-head" style="justify-content:space-between;align-items:baseline;">
+      <div class="section-name">Colors</div>
+      <div class="color-palette-eyebrow" style="margin-bottom:0;">Color Palette</div>
+    </div>
     <div class="section-divider"></div>
-    <div class="grid-2">
-      <!-- Core -->
-      <div class="token-card">
-        <div class="token-label">Core Brand Colors</div>
-        <div class="swatches">
-          <div class="swatch"><div class="swatch-block" style="background:#0A0A0A;"></div><div class="swatch-name">Ink</div><div class="swatch-hex">#0A0A0A</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#0048FF;"></div><div class="swatch-name">Signal Blue</div><div class="swatch-hex">#0048FF</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#0D4689;"></div><div class="swatch-name">Brand Blue</div><div class="swatch-hex">#0D4689</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#4DA8DD;"></div><div class="swatch-name">Sky Blue</div><div class="swatch-hex">#4DA8DD</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#070F1A;border:1px solid #333;"></div><div class="swatch-name">Dark 900</div><div class="swatch-hex">#070F1A</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#F5F8FF;border:1px solid #ddd;"></div><div class="swatch-name">Surface</div><div class="swatch-hex">#F5F8FF</div></div>
+
+    <div class="color-palette-sheet">
+    <header class="color-palette-preamble">
+      <div class="color-palette-preamble-top">
+        <div>
+          <div class="color-palette-title">Color Palette</div>
+          <p class="color-palette-lede color-palette-lede--preamble">The Gurufin color palette defines the brand&apos;s visual identity, conveying professionalism, trust, and modernity across all digital and physical touchpoints. Consistent use ensures strong recognition and cohesive brand presence.</p>
+        </div>
+        <span class="color-palette-brand-eyebrow">Brand color</span>
+      </div>
+    </header>
+    <div class="color-palette-layout">
+      <div class="color-palette-intro">
+        <div class="color-rules">
+          <div class="color-rules-title">Rules</div>
+          <ul>
+            <li>Minimum contrast: WCAG AA for body text</li>
+            <li>Logo: black on light, white (or inverted PNG) on dark</li>
+            <li>One accent per screen: links, focus, primary CTA</li>
+          </ul>
         </div>
       </div>
-      <!-- Neutrals -->
-      <div class="token-card">
-        <div class="token-label">Neutral Scale</div>
-        <div class="swatches">
-          <div class="swatch"><div class="swatch-block" style="background:#363E49;"></div><div class="swatch-name">900</div><div class="swatch-hex">#363E49</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#5B6B7E;"></div><div class="swatch-name">700</div><div class="swatch-hex">#5B6B7E</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#889BB7;"></div><div class="swatch-name">500</div><div class="swatch-hex">#889BB7</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#C6D4E3;"></div><div class="swatch-name">300</div><div class="swatch-hex">#C6D4E3</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#E6EDF5;border:1px solid #ddd;"></div><div class="swatch-name">100</div><div class="swatch-hex">#E6EDF5</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#fff;border:1px solid #ddd;"></div><div class="swatch-name">Paper</div><div class="swatch-hex">#FFFFFF</div></div>
+      <div class="color-palette-groups">
+        <div class="palette-group">
+          <div class="palette-group-label">Core</div>
+          <div class="palette-row-swatches palette-row-swatches--core">
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#0A0A0A;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Ink</span>
+                <span class="palette-swatch-hex">#0A0A0A</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#0048FF;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Signal Blue</span>
+                <span class="palette-swatch-hex">#0048FF</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#0D4689;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Brand Blue</span>
+                <span class="palette-swatch-hex">#0D4689</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#4DA8DD;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Sky Blue</span>
+                <span class="palette-swatch-hex">#4DA8DD</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#070F1A;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Dark 900</span>
+                <span class="palette-swatch-hex">#070F1A</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip palette-swatch-chip--bordered" style="background:#F5F8FF;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Surface</span>
+                <span class="palette-swatch-hex">#F5F8FF</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="palette-group">
+          <div class="palette-group-label">Accent and states</div>
+          <div class="palette-row-swatches palette-row-swatches--accent">
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#0048FF;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Signal Blue</span>
+                <span class="palette-swatch-hex">#0048FF</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#40BF43;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Success</span>
+                <span class="palette-swatch-hex">#40BF43</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#FF2424;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Danger</span>
+                <span class="palette-swatch-hex">#FF2424</span>
+              </div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#FF9822;"></div>
+              <div class="palette-swatch-caption">
+                <span class="palette-swatch-name">Warning</span>
+                <span class="palette-swatch-hex">#FF9822</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="palette-group">
+          <div class="palette-group-label">Neutrals</div>
+          <div class="palette-row-swatches palette-row-swatches--neutral">
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#363E49;"></div>
+              <div class="palette-swatch-caption palette-swatch-caption--hex-only"><span class="palette-swatch-hex">#363E49</span></div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#5B6B7E;"></div>
+              <div class="palette-swatch-caption palette-swatch-caption--hex-only"><span class="palette-swatch-hex">#5B6B7E</span></div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#889BB7;"></div>
+              <div class="palette-swatch-caption palette-swatch-caption--hex-only"><span class="palette-swatch-hex">#889BB7</span></div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip" style="background:#C6D4E3;"></div>
+              <div class="palette-swatch-caption palette-swatch-caption--hex-only"><span class="palette-swatch-hex">#C6D4E3</span></div>
+            </div>
+            <div class="palette-swatch-card">
+              <div class="palette-swatch-chip palette-swatch-chip--bordered" style="background:#F0F8FF;"></div>
+              <div class="palette-swatch-caption palette-swatch-caption--hex-only"><span class="palette-swatch-hex">#F0F8FF</span></div>
+            </div>
+          </div>
         </div>
       </div>
-      <!-- States -->
-      <div class="token-card">
-        <div class="token-label">State / Semantic</div>
-        <div class="swatches">
-          <div class="swatch"><div class="swatch-block" style="background:#40BF43;"></div><div class="swatch-name">Success</div><div class="swatch-hex">#40BF43</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#FF2424;"></div><div class="swatch-name">Danger</div><div class="swatch-hex">#FF2424</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#FF9822;"></div><div class="swatch-name">Warning</div><div class="swatch-hex">#FF9822</div></div>
-          <div class="swatch"><div class="swatch-block" style="background:#5B7CF7;"></div><div class="swatch-name">CTA</div><div class="swatch-hex">#5B7CF7</div></div>
+    </div>
+    </div>
+
+    <div class="brand-color-doc">
+      <div class="brand-color-doc-intro-top">
+        <h2 class="brand-color-heading">Brand Color</h2>
+        <span class="brand-color-doc-eyebrow">Brand color</span>
+      </div>
+      <p class="brand-color-lede">The Gurufin color palette defines the brand&apos;s visual identity, conveying professionalism, trust, and modernity across all digital and physical touchpoints. Consistent use ensures strong recognition and cohesive brand presence.</p>
+      <div class="brand-color-code-label">Color Code</div>
+      <div class="color-code-panel">
+        <div class="color-code-stack">
+          <div class="color-code-band">
+            <div class="color-code-swatch" style="background:#0A0A0A;" aria-hidden="true">
+              <span class="color-code-swatch-hex">#0A0A0A</span>
+            </div>
+            <div class="color-code-rgba">
+              <div class="color-code-rgba-row">R: <span class="rgba-val">10</span></div>
+              <div class="color-code-rgba-row">G: <span class="rgba-val">10</span></div>
+              <div class="color-code-rgba-row">B: <span class="rgba-val">10</span></div>
+              <div class="color-code-rgba-row">A: <span class="rgba-val">1</span></div>
+            </div>
+            <div>
+              <div class="color-code-use-title">Primary Typography &amp; Structure</div>
+              <p class="color-code-use-desc">Used for all main text, headlines, and structural elements. Provides deep contrast for maximum readability and a professional, grounded feel.</p>
+            </div>
+          </div>
+          <div class="color-code-band">
+            <div class="color-code-swatch" style="background:#0D4689;" aria-hidden="true">
+              <span class="color-code-swatch-hex">#0D4689</span>
+            </div>
+            <div class="color-code-rgba">
+              <div class="color-code-rgba-row">R: <span class="rgba-val">13</span></div>
+              <div class="color-code-rgba-row">G: <span class="rgba-val">70</span></div>
+              <div class="color-code-rgba-row">B: <span class="rgba-val">137</span></div>
+              <div class="color-code-rgba-row">A: <span class="rgba-val">1</span></div>
+            </div>
+            <div>
+              <div class="color-code-use-title">Primary Call to Action &amp; Highlights</div>
+              <p class="color-code-use-desc">The main color for buttons, links, highlights, and actionable elements. Conveys energy, technology, and trust, driving engagement and reinforcing the brand&apos;s modernity.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -361,82 +1224,68 @@
 
   <!-- ── TYPOGRAPHY ── -->
   <section id="type" class="section">
-    <div class="section-head"><div class="section-name">Typography</div></div>
-    <div class="section-divider"></div>
-    <div class="token-card">
-      <div class="token-label">Type Scale — Helvetica Neue</div>
-      <div style="display:flex;flex-direction:column;">
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Display</div><div class="type-meta-spec">54px / 58 · Bold</div></div><div class="type-specimen" style="font-size:42px;font-weight:700;letter-spacing:-0.02em;">84.50</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">H1</div><div class="type-meta-spec">40px / 48 · Bold</div></div><div class="type-specimen" style="font-size:32px;font-weight:700;letter-spacing:-0.01em;">Compliance-grade stability.</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">H2</div><div class="type-meta-spec">28px / 34 · Bold</div></div><div class="type-specimen" style="font-size:24px;font-weight:700;letter-spacing:-0.01em;">Gurufin Chain Infrastructure</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Lead</div><div class="type-meta-spec">18px / 24 · Regular</div></div><div class="type-specimen" style="font-size:18px;font-weight:400;">Programmable rails for modern finance — built to integrate.</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Body</div><div class="type-meta-spec">16px / 24 · Regular</div></div><div class="type-specimen" style="font-size:16px;font-weight:400;">GX Stablecoins are minted when users deposit fiat through licensed partners.</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Label</div><div class="type-meta-spec">12px / 18 · Bold · Caps</div></div><div class="type-specimen" style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Brand Color · Typography · Applications</div></div>
-        <div class="type-row"><div class="type-meta"><div class="type-meta-name">Mono</div><div class="type-meta-spec">16px · Numbers</div></div><div class="type-specimen" style="font-size:15px;font-family:'Courier New',monospace;color:#0D4689;">#0D4689 · 84.50 GX · TXN-0042FF</div></div>
-      </div>
+    <div class="section-head" style="justify-content:space-between;align-items:baseline;">
+      <div class="section-name">Typography</div>
+      <div class="color-palette-eyebrow" style="margin-bottom:0;">Typography</div>
     </div>
-  </section>
-
-  <!-- ── COMPONENTS ── -->
-  <section id="components" class="section">
-    <div class="section-head"><div class="section-name">Components</div></div>
     <div class="section-divider"></div>
-    <div class="grid-2">
 
-      <!-- Buttons -->
-      <div class="component-card">
-        <div class="component-preview dark">
-          <div class="btn-row" style="margin-bottom:10px;">
-            <button class="ds-btn ds-btn-primary">Get Started →</button>
-            <button class="ds-btn ds-btn-white">WhitePaper →</button>
-            <button class="ds-btn ds-btn-ghost">Learn More</button>
+    <div class="type-page-layout">
+      <div class="type-page-left">
+        <h2 class="type-hero-heading">Helvetica for clarity.<br>Helvetica for precision.</h2>
+        <p class="type-hero-lede">Gurufin uses Helvetica Neue for clear communication and a modern corporate identity. Consistent hierarchy and restrained styling keep interfaces readable across product, marketing, and documentation.</p>
+        <div class="type-usage-cards">
+          <div class="type-usage-card">
+            <div class="type-usage-card-label">Headlines</div>
+            <div class="type-usage-card-main">Helvetica Neue Bold / Heavy (700–800)</div>
+            <div class="type-usage-card-sub">Tight tracking (−0.01em to −0.02em)</div>
           </div>
-          <div class="btn-row">
-            <button class="ds-btn ds-btn-primary ds-btn-sm">Small →</button>
-            <button class="ds-btn ds-btn-danger">Danger</button>
+          <div class="type-usage-card">
+            <div class="type-usage-card-label">Body</div>
+            <div class="type-usage-card-main">Helvetica Neue Light / Regular (300–400)</div>
+            <div class="type-usage-card-sub">Comfortable line-height</div>
           </div>
-        </div>
-        <div class="component-label">Buttons</div>
-      </div>
-
-      <!-- Badges -->
-      <div class="component-card">
-        <div class="component-preview" style="display:flex;flex-direction:column;gap:10px;">
-          <div class="badge-row">
-            <span class="ds-badge badge-blue">Gurufin Chain</span>
-            <span class="ds-badge badge-signal">GX Stablecoin</span>
-            <span class="ds-badge badge-neutral">IBC</span>
-          </div>
-          <div class="badge-row">
-            <span class="ds-badge badge-success"><span class="dot" style="background:#40BF43;width:6px;height:6px;border-radius:50%;"></span>Confirmed</span>
-            <span class="ds-badge badge-danger">Failed</span>
-            <span class="ds-badge badge-warning">Pending</span>
+          <div class="type-usage-card">
+            <div class="type-usage-card-label">Mono</div>
+            <div class="type-usage-card-main">Paper Mono (Preview)</div>
+            <div class="type-usage-card-sub">Numbers, code, labels</div>
           </div>
         </div>
-        <div class="component-label">Badges & Tags</div>
+        <div class="type-tone-card">
+          <div class="type-tone-label">Tone example</div>
+          <div class="type-tone-headline">Compliance-grade stability.</div>
+          <p class="type-tone-body">Programmable rails for modern finance — built to integrate, audited by design, and optimized for real-world operations.</p>
+        </div>
       </div>
 
-      <!-- Card -->
-      <div class="component-card">
-        <div class="component-preview">
-          <div class="ds-card-light">
-            <span class="ds-card-pill">Development</span>
-            <div class="ds-card-title">Gurufin Chain: Security Audit</div>
-            <div class="ds-card-body">Building a trusted, resilient L1 for stablecoins. Compliance-grade stability.</div>
+      <div class="type-page-right">
+        <div class="token-card type-scale-card">
+          <div class="type-scale-card-head">
+            <span class="type-scale-card-title">Type scale</span>
+            <span class="type-scale-card-hint">px / line-height</span>
+          </div>
+          <div style="display:flex;flex-direction:column;">
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">Display</div><div class="type-meta-spec">54px / 58 · Bold</div></div><div class="type-specimen" style="font-size:42px;font-weight:700;letter-spacing:-0.02em;">84.50</div></div>
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">H1</div><div class="type-meta-spec">40px / 48 · Bold</div></div><div class="type-specimen" style="font-size:32px;font-weight:700;letter-spacing:-0.01em;">Compliance-grade stability.</div></div>
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">H2</div><div class="type-meta-spec">28px / 34 · Bold</div></div><div class="type-specimen" style="font-size:24px;font-weight:700;letter-spacing:-0.01em;">Gurufin Chain Infrastructure</div></div>
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">Lead</div><div class="type-meta-spec">18px / 24 · Regular</div></div><div class="type-specimen" style="font-size:18px;font-weight:400;">Programmable rails for modern finance — built to integrate.</div></div>
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">Body</div><div class="type-meta-spec">16px / 24 · Regular</div></div><div class="type-specimen" style="font-size:16px;font-weight:400;line-height:24px;">GX Stablecoins are minted when users deposit fiat through licensed partners.</div></div>
+            <div class="type-row"><div class="type-meta"><div class="type-meta-name">Label</div><div class="type-meta-spec">12px / 18 · Bold · Caps</div></div><div class="type-specimen" style="font-size:12px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;">Brand Color · Typography · Applications</div></div>
           </div>
         </div>
-        <div class="component-label">Cards</div>
-      </div>
-
-      <!-- Inputs -->
-      <div class="component-card">
-        <div class="component-preview" style="display:flex;flex-direction:column;gap:12px;">
-          <div><label class="ds-label">Wallet Address</label><input class="ds-input" type="text" placeholder="0x1a2b3c4d…"></div>
-          <div><label class="ds-label">Amount (GX)</label><input class="ds-input" type="text" placeholder="0.00" style="font-family:monospace;border-color:#5B7CF7;box-shadow:0 0 0 3px rgba(91,124,247,0.12);"></div>
+        <div class="type-mini-cards">
+          <div class="type-mini-card">
+            <div class="type-mini-card-label">Numbers</div>
+            <div class="type-mini-card-sample">84.50</div>
+            <p class="type-mini-card-desc">Use mono for prices, IDs, and code-like data.</p>
+          </div>
+          <div class="type-mini-card">
+            <div class="type-mini-card-label">Tracking</div>
+            <div class="type-mini-card-title">Tight &amp; confident</div>
+            <p class="type-mini-card-desc">Prefer slight negative tracking for large headlines only.</p>
+          </div>
         </div>
-        <div class="component-label">Form Inputs</div>
       </div>
-
     </div>
   </section>
 
@@ -444,56 +1293,123 @@
   <section id="brand" class="section">
     <div class="section-head"><div class="section-name">Brand Assets</div></div>
     <div class="section-divider"></div>
-    <div style="display:flex;flex-direction:column;gap:16px;">
+    <div class="brand-assets-stack">
 
-      <!-- Logo grid -->
-      <div class="logo-grid">
-        <div class="logo-cell dark">
-          <img src="assets/logo-horizontal-white.png" alt="Gurufin logo white">
-          <div class="logo-label" style="color:rgba(255,255,255,0.3);">Horizontal · White on Dark</div>
+      <div id="brand-logo" class="brand-asset-block">
+        <h3 class="brand-asset-heading">Logo</h3>
+        <svg xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" width="0" height="0" style="position:absolute;overflow:hidden;clip:rect(0,0,0,0)">
+          <defs>
+            <symbol id="symbol-gurufin-mark" viewBox="0 0 422 486">
+              <path fill="currentColor" fill-rule="evenodd" d="M213.199 486 422 367.244 422 125.348 213.199 0 0 125.348 0 391.44l105.5-63.776 107.699 63.776 118.689-68.174V151.737L127.48 272.686v-72.569l85.719-48.38V101.158L83.521 173.728v120.951L41.761 318.869V151.737L213.199 48.38l167.041 103.357V343.056L213.199 442.015V486zM147.261 305.674L292.324 219.909V294.679L211.001 343.056L147.261 305.674z"/>
+            </symbol>
+          </defs>
+        </svg>
+        <div class="logo-construction">
+          <div class="logo-construction-main">
+            <div class="logo-construction-copy">
+              <h4 class="logo-construction-title">Logo Construction</h4>
+              <p class="logo-construction-intro">
+                Logo construction defines the precise proportions, spacing, and alignment of the Gurufin logo. Adhering to these guidelines ensures consistency, balance, and a strong visual presence across all brand applications.
+              </p>
+              <div class="logo-construction-specs">
+                <div class="logo-construction-spec-card">
+                  <div class="logo-construction-spec-label">Minimum digital</div>
+                  <div class="logo-construction-spec-body">Lockup width ≥ 160px • Mark-only ≥ 24px • Always approved SVG/PDF/PNG exports.</div>
+                </div>
+                <div class="logo-construction-spec-card">
+                  <div class="logo-construction-spec-label">Stroke weight</div>
+                  <div class="logo-construction-spec-body">Never redraw the monogram or alter stencil gaps in R/F — use master artwork only.</div>
+                </div>
+              </div>
+            </div>
+            <div class="logo-construction-visual">
+              <div class="logo-construction-stage">
+                <div class="logo-construction-stage-inset">
+                  <div class="logo-construction-safe">
+                    <svg class="lc-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422 486"><use href="#symbol-gurufin-mark"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="logo-cell light">
-          <img src="assets/logo-horizontal-black.png" alt="Gurufin logo black">
-          <div class="logo-label">Horizontal · Black on Light</div>
-        </div>
-        <div class="logo-cell dark" style="padding:20px;">
-          <img src="assets/app-icon.png" alt="App icon" style="max-width:72px;border-radius:18px;">
-          <div class="logo-label" style="color:rgba(255,255,255,0.3);">App Icon</div>
-        </div>
-        <div class="logo-cell dark">
-          <svg width="52" height="60" viewBox="0 0 184 212" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M92.9587 212L184 160.197V54.6786L92.9587 0L0 54.6786V170.752L46.0002 142.932L92.9587 170.752L144.71 141.013V66.1899L55.5836 118.95V87.2937L92.9587 66.1899V44.1266L36.4168 75.7824V128.543L18.2085 139.095V66.1899L92.9587 21.104L165.792 66.1899V149.646L92.9587 192.813V212ZM64.2087 133.339L127.459 95.9272V128.543L92.0004 149.646L64.2087 133.339Z" fill="white"/></svg>
-          <div class="logo-label" style="color:rgba(255,255,255,0.3);">Mark Only · SVG</div>
-        </div>
-      </div>
-
-      <!-- Mascot -->
-      <div class="mascot-card">
-        <img class="mascot-img" src="assets/mascot.png" alt="Golden Wing mascot">
-        <div class="mascot-text">
-          <div class="mascot-name">The Golden Wing</div>
-          <div class="mascot-desc">Gurufin's mascot — inspired by the myth of Garuda. Symbolises speed, protection, and clarity in complex financial systems.</div>
-          <div class="mascot-tags">
-            <span class="mascot-tag">Protective</span>
-            <span class="mascot-tag">Fast & Precise</span>
-            <span class="mascot-tag">Myth-Inspired</span>
+        <div class="logo-system">
+          <div class="logo-system-head-row">
+            <span class="logo-system-eyebrow">Logo variation</span>
+          </div>
+          <div class="logo-system-main-title">Approved Logo System</div>
+          <p class="logo-system-desc">
+            The approved Gurufin logo system provides clear guidelines for consistent and correct usage across all applications. Following these standards ensures brand integrity, visibility, and a cohesive corporate identity.
+          </p>
+          <div class="logo-system-grid">
+            <div class="logo-system-card logo-system-card--light">
+              <span class="logo-system-card-label">Primary light</span>
+              <div class="logo-system-stack-lockup">
+                <svg class="lg-sys-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 422 486" aria-hidden="true"><use href="#symbol-gurufin-mark"/></svg>
+                <span class="logo-system-stack-type">GURUFIN</span>
+              </div>
+            </div>
+            <div class="logo-system-card logo-system-card--dark">
+              <span class="logo-system-card-label">Primary dark</span>
+              <img class="logo-system-shot" src="assets/logo-primary-dark-lockup.png" alt="Gurufin horizontal logo — white on black">
+            </div>
+            <div class="logo-system-card logo-system-card--light">
+              <span class="logo-system-card-label">Primary color</span>
+              <div class="logo-system-duo">
+                <img class="logo-system-shot" src="assets/logo-primary-color-mark-gradient.png" alt="Gradient logomark on black">
+                <img class="logo-system-shot" src="assets/logo-primary-color-square.png" alt="Logomark on blue gradient tile">
+              </div>
+            </div>
+            <div class="logo-system-card logo-system-card--light">
+              <span class="logo-system-card-label">App icon</span>
+              <img class="logo-system-app" src="assets/logo-app-icon.png" alt="Gurufin app icon">
+            </div>
+            <div class="logo-system-card logo-system-card--light">
+              <span class="logo-system-card-label">Document</span>
+              <img class="logo-system-shot" src="assets/logo-document-gray.png" alt="Gurufin horizontal logo — neutral gray for documents">
+            </div>
+            <div class="logo-system-card logo-system-card--media">
+              <span class="logo-system-card-label">Media logo</span>
+              <div class="logo-system-media-only">
+                <img class="logo-system-media-img" src="assets/logo-media.png" width="107" height="123" alt="Gurufin media logomark">
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Brand Guidelines Figma -->
-      <div class="figma-card">
-        <div class="figma-cover">
-          <img src="assets/brand-guideline-ppt-cover.png" alt="Brand Style Guideline">
-        </div>
-        <div class="figma-footer">
-          <div>
-            <div class="figma-info-name">Brand Style Guideline</div>
-            <div class="figma-info-meta">Figma Slides · V1.0 — 2026 · Official brand system for GURUFIN</div>
+      <div id="brand-mascot" class="brand-asset-block">
+        <h3 class="brand-asset-heading">Mascot</h3>
+        <div class="mascot-card">
+          <img class="mascot-img" src="assets/mascot.png" alt="Golden Wing mascot">
+          <div class="mascot-text">
+            <div class="mascot-name">The Golden Wing</div>
+            <div class="mascot-desc">Gurufin's mascot — inspired by the myth of Garuda. Symbolises speed, protection, and clarity in complex financial systems.</div>
+            <div class="mascot-tags">
+              <span class="mascot-tag">Protective</span>
+              <span class="mascot-tag">Fast & Precise</span>
+              <span class="mascot-tag">Myth-Inspired</span>
+            </div>
           </div>
-          <a class="dl-btn" href="https://www.figma.com/slides/TUAIt7vh9z9GVeY0ztJjZe" target="_blank">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13a6 6 0 0 1-6 6H5a6 6 0 0 1 0-12h3"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
-            Open in Figma
-          </a>
+        </div>
+      </div>
+
+      <div id="brand-presentation" class="brand-asset-block">
+        <h3 class="brand-asset-heading">Presentation</h3>
+        <div class="figma-card">
+          <div class="figma-cover">
+            <img src="assets/brand-guideline-ppt-cover.png" alt="Brand Style Guideline">
+          </div>
+          <div class="figma-footer">
+            <div>
+              <div class="figma-info-name">Brand Style Guideline</div>
+              <div class="figma-info-meta">Figma Slides · V1.0 — 2026 · Official brand system for GURUFIN</div>
+            </div>
+            <a class="dl-btn" href="https://www.figma.com/slides/TUAIt7vh9z9GVeY0ztJjZe" target="_blank">
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M18 13a6 6 0 0 1-6 6H5a6 6 0 0 1 0-12h3"/><path d="M15 3h6v6"/><path d="M10 14L21 3"/></svg>
+              Open in Figma
+            </a>
+          </div>
         </div>
       </div>
 
@@ -530,9 +1446,6 @@
             Follow on LinkedIn
           </a>
         </div>
-      </div>
-      <!-- Telegram -->
-      <div class="links-grid" style="margin-top:16px;">
         <div class="link-card">
           <div class="link-top">
             <div class="link-avatar" style="background:#229ED9;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></div>
@@ -622,7 +1535,7 @@
   </section>
 
   <!-- EMAIL SIGNATURE -->
-  <section class="section">
+  <section id="email-signature" class="section">
     <div class="section-head"><div class="section-name">Email Signature</div></div>
     <div class="section-divider"></div>
     <div class="email-card">
@@ -636,9 +1549,8 @@
             <td style="padding:14px 0;vertical-align:middle;">
               <div style="font-size:13px;color:#0A0A0A;line-height:1.3;"><strong>Jack Reno</strong> <span style="font-weight:400;color:#444;">| Senior Manager</span></div>
               <div style="font-size:11px;color:#888888;margin-top:4px;">11, Yeoksam-ro 3-gil, Gangnam-gu, Seoul 9th floor</div>
-              <div style="font-size:11px;color:#444444;margin-top:6px;">
-                <span style="font-weight:700;color:#0D4689;">W</span>&nbsp;<a href="https://www.gurufin.com" style="color:#444444;text-decoration:none;">www.gurufin.com</a><br>
-                <span style="font-weight:700;color:#0D4689;">E</span>&nbsp;<a href="/cdn-cgi/l/email-protection#f19b90929ab19684838497989fdf929e9c" style="color:#444444;text-decoration:none;"><span class="__cf_email__" data-cfemail="86ece7e5edc6e1f3f4f3e0efe8a8e5e9eb">[email&#160;protected]</span></a>&nbsp;&nbsp;&nbsp;<span style="font-weight:700;color:#0D4689;">M</span>&nbsp;+82 010 XXXX XXXX
+              <div style="font-size:11px;color:#444444;margin-top:6px;line-height:1.4;white-space:nowrap;">
+                <span style="font-weight:700;color:#0D4689;">W</span>&nbsp;<a href="https://www.gurufin.com" style="color:#444444;text-decoration:none;">www.gurufin.com</a>&nbsp;&nbsp;&nbsp;<span style="font-weight:700;color:#0D4689;">E</span>&nbsp;<a href="mailto:jack@gurufin.com" style="color:#444444;text-decoration:none;">jack@gurufin.com</a>&nbsp;&nbsp;&nbsp;<span style="font-weight:700;color:#0D4689;">M</span>&nbsp;+82 010 XXXX XXXX
               </div>
             </td>
           </tr>
@@ -651,6 +1563,33 @@
     </div>
   </section>
 
+  <!-- BUSINESS CARD -->
+  <section id="business-card" class="section">
+    <div class="section-head"><div class="section-name">Business Card</div></div>
+    <div class="section-divider"></div>
+    <p style="font-size:13px;color:#666;line-height:1.55;max-width:640px;margin-bottom:18px;">
+      Standard horizontal card: contact side and brand back. Download the Illustrator source to update name, title, QR, and contact details — keep clear space and proportions from the master artwork.
+    </p>
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div class="component-card">
+        <div class="component-preview" style="background:#E8EDF2;display:flex;align-items:center;justify-content:center;padding:20px;">
+          <img src="assets/business-card-front.png" alt="Gurufin business card — front side" style="max-width:100%;height:auto;border-radius:10px;box-shadow:0 6px 28px rgba(0,0,0,0.12);">
+        </div>
+        <div class="component-label">Front</div>
+      </div>
+      <div class="component-card">
+        <div class="component-preview" style="background:#E8EDF2;display:flex;align-items:center;justify-content:center;padding:20px;">
+          <img src="assets/business-card-back.png" alt="Gurufin business card — back side" style="max-width:100%;height:auto;border-radius:10px;box-shadow:0 6px 28px rgba(0,0,0,0.12);">
+        </div>
+        <div class="component-label">Back</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:flex-start;">
+      <a class="dl-btn" href="assets/GURUFIN-business-card.ai" download="[명함] GURUFIN.ai">Download .ai</a>
+      <span style="font-size:12px;color:#888;">Adobe Illustrator · for editing</span>
+    </div>
+  </section>
+
 </main>
 
 <!-- FOOTER -->
@@ -659,10 +1598,11 @@
   <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:'Courier New',monospace;">Design System V1.0 · 2026 · gurufin.com</div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 async function dlFile(url, filename) {
   try {
     const res = await fetch(url);
+    if (!res.ok) throw new Error(res.statusText);
     const blob = await res.blob();
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -670,7 +1610,16 @@ async function dlFile(url, filename) {
     document.body.appendChild(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-  } catch(e) { alert('Download failed: ' + e.message); }
+  } catch (e) {
+    /* file:// or CORS: fetch is blocked — same-tab download via direct link */
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.rel = 'noopener';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
 }
 
 // Smooth scroll nav
